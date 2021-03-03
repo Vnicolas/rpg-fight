@@ -1,0 +1,35 @@
+<section class="section home">
+  <div class="container">
+    <h1 class="title">
+      RPG-FIGHT
+    </h1>
+    <p class="subtitle">
+      Create yours characters and make them fight for you !
+    </p>
+    <section class="column is-half is-offset-one-quarter">
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Type your username" [(ngModel)]="username">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" type="password" placeholder="Type your password" [(ngModel)]="password">
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" (click)="signup()">Signup</button>
+        </div>
+        <div class="control">
+          <button class="button" (click)="signin()">Signin</button>
+        </div>
+      </div>
+      <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>
+    </section>
+  </div>
+</section>
