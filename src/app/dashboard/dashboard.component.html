@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+<div class="container">
+  <section class="column is-half is-offset-one-quarter">
+    <h1 class="title is-1">Characters List</h1>
+    <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
+    <table class="table" *ngIf="user.characters.length > 0">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Attack</th>
+          <th>Defense</th>
+          <th>Magik</th>
+          <th>Fights</th>
+          <th>Skill Pts</th>
+          <th>Skill Pts Av.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let characters in user.characters">
+          <td>characters.picture</td>
+          <td>characters.rank</td>
+          <td>characters.attack</td>
+          <td>characters.defense</td>
+          <td>characters.magik</td>
+          <td>characters.fights.length</td>
+          <td>characters.skillPoints</td>
+          <td>characters.skillPointsAvailaible</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Type a name">
+      </div>
+      <button class="button is-primary" (click)="createCharacter()">Create a character</button>
+    </div>
+  </section>
+</div>

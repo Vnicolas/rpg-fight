@@ -23,19 +23,22 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const account: User = this.storageService.getItem('account', true);
     if (account) {
-      this.gotToDashboard();
+      this.goToDashboard();
     }
   }
 
-  private gotToDashboard(): void {
+  private goToDashboard(): void {
     this.router.navigateByUrl('/dashboard');
   }
 
   public signup(): void {
     this.errorMessage = '';
+    if (!this.checkFields()) {
+      return;
+    }
     this.userService.signup(this.username, this.password).subscribe((user: User) => {
       this.storageService.setItem('account', user, true);
-      this.gotToDashboard();
+      this.goToDashboard();
     }, (error: string) => {
       this.errorMessage = error;
     });
@@ -43,12 +46,24 @@ export class HomeComponent implements OnInit {
 
   public signin(): void {
     this.errorMessage = '';
+    if (!this.checkFields()) {
+      return;
+    }
     this.userService.signin(this.username, this.password).subscribe((user: User) => {
       this.storageService.setItem('account', user, true);
-      this.gotToDashboard();
+      this.goToDashboard();
     }, (error: string) => {
       this.errorMessage = error;
     });
+  }
+
+  public checkFields(): boolean {
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Please fill all the fields';
+      // TODO check in backend too
+      return false;
+    }
+    return true;
   }
 
 }

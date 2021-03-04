@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from 'src/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuardService } from 'src/services/auth/auth-guard.service';
+import { AuthService } from 'src/services/auth/auth.service';
+import { CharacterInfosComponent } from './character-infos/character-infos.component';
 
 library.add(fas);
 
@@ -19,7 +22,8 @@ library.add(fas);
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    CharacterInfosComponent
   ],
   imports: [
     FormsModule,
@@ -28,7 +32,7 @@ library.add(fas);
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [UserService],
+  providers: [AuthService, AuthGuardService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
