@@ -3,6 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from 'src/app/interfaces/user';
+import { Character } from 'src/app/interfaces/character';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,15 @@ export class UserService {
 
   signin(name: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.backendUrl}users/login`, {name, password})
+    .pipe(
+      first(),
+      catchError(this.handleError)
+    );
+  }
+
+  // TODO: Put into a new character service
+  createCharacter(name: string, owner: string): Observable<Character> {
+    return this.http.post<Character>(`${this.backendUrl}characters`, {name, owner})
     .pipe(
       first(),
       catchError(this.handleError)
