@@ -26,4 +26,8 @@ export class StorageService {
       localStorage.setItem(itemName, itemValue);
     }
   }
+
+  removeItem(itemName: string): void {
+    localStorage.removeItem(itemName);
+  }
 }

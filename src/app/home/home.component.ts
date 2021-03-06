@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth/auth.service';
 import { StorageService } from 'src/services/storage.service';
 import { UserService } from 'src/services/user.service';
 import { User } from '../interfaces/user';
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   public errorMessage = '';
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private storageService: StorageService,
     private router: Router) {}
 
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
     if (!this.checkFields()) {
       return;
     }
-    this.userService.signup(this.username, this.password).subscribe((user: User) => {
+    this.authService.signup(this.username, this.password).subscribe((user: User) => {
       this.storageService.setItem('account', user, true);
       this.goToDashboard();
     }, (error: string) => {
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
     if (!this.checkFields()) {
       return;
     }
-    this.userService.signin(this.username, this.password).subscribe((user: User) => {
+    this.authService.signin(this.username, this.password).subscribe((user: User) => {
       this.storageService.setItem('account', user, true);
       this.goToDashboard();
     }, (error: string) => {

@@ -1,43 +1,57 @@
+<nav *ngIf="user" class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <span class="user-name">{{ user.name }}</span>
+    </div>
+    <div class="navbar-item">
+      <button class="button" (click)="signOut()">Sign out</button>
+    </div>
+  </div>
+</nav>
+
 <div *ngIf="user" class="container">
   <section class="column is-half is-offset-one-quarter">
-    <h1 class="title is-1">Characters List</h1>
-    <p *ngIf="user.characters && user.characters.length === 0">You don't have any characters yet, let's create one !</p>
-    <table class="table" *ngIf="user.characters && user.characters.length > 0">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Rank</th>
-          <th>Attack</th>
-          <th>Defense</th>
-          <th>Magik</th>
-          <th>Fights</th>
-          <th>Skill Pts</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let character of user.characters">
-          <td>
-            <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
-          </td>
-          <td>{{ character.name }}</td>
-          <td>{{ character.rank }}</td>
-          <td>{{ character.attack }}</td>
-          <td>{{ character.defense }}</td>
-          <td>{{ character.magik }}</td>
-          <td>{{ character.fights.length }}</td>
-          <td>{{ character.skillPoints }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+    <div  class="box">
+      <h1 class="title is-1">Characters List</h1>
+      <p *ngIf="user.characters && user.characters.length === 0">You don't have any characters yet, let's create one !</p>
+      <table class="table" *ngIf="user.characters && user.characters.length > 0">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Attack</th>
+            <th>Defense</th>
+            <th>Magik</th>
+            <th>Fights</th>
+            <th>Skill Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let character of user.characters">
+            <td>
+              <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
+            </td>
+            <td>{{ character.name }}</td>
+            <td>{{ character.rank }}</td>
+            <td>{{ character.attack }}</td>
+            <td>{{ character.defense }}</td>
+            <td>{{ character.magik }}</td>
+            <td>{{ character.fights.length }}</td>
+            <td>{{ character.skillPoints }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+        </div>
+        <br>
+        <button class="button is-primary" (click)="createCharacter()">Create a new character</button>
       </div>
-      <br>
-      <button class="button is-primary" (click)="createCharacter()">Create a new character</button>
     </div>
+
   </section>
 </div>
