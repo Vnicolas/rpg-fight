@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/services/storage.service';
 import { User } from '../interfaces/user';
-
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from 'src/services/user.service';
 import { Character } from '../interfaces/character';
 import { Router } from '@angular/router';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -18,13 +19,15 @@ export class DashboardComponent implements OnInit {
   public errorMessage = '';
   public user!: User;
   public newCharacterName = '';
-  public svg: SafeHtml = '';
 
   constructor(
+    library: FaIconLibrary,
     private storageService: StorageService,
     private sanitizer: DomSanitizer,
     private userService: UserService,
-    private router: Router) {}
+    private router: Router) {
+      library.addIcons(faPlus);
+    }
 
   ngOnInit(): void {
     this.user = this.storageService.getItem('account', true);

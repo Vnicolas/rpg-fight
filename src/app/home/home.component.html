@@ -9,15 +9,21 @@
     <section class="column is-half is-offset-one-quarter">
       <div class="field">
         <label class="label">Username</label>
-        <div class="control">
+        <div class="control has-icons-left">
           <input class="input" type="text" placeholder="Type your username" [(ngModel)]="username">
+          <span class="icon is-small is-left">
+            <fa-icon [icon]="['fas', 'user']"></fa-icon>
+          </span>
         </div>
       </div>
 
       <div class="field">
         <label class="label">Password</label>
-        <div class="control">
+        <div class="control has-icons-left">
           <input class="input" type="password" placeholder="Type your password" [(ngModel)]="password">
+          <span class="icon is-small is-left">
+            <fa-icon [icon]="['fas', 'key']"></fa-icon>
+          </span>
         </div>
       </div>
 

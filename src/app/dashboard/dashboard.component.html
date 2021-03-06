@@ -11,7 +11,6 @@
 
 <div *ngIf="user" class="container">
   <section class="column is-half is-offset-one-quarter">
-    <div  class="box">
       <h1 class="title is-1">Characters List</h1>
       <p *ngIf="user.characters && user.characters.length === 0">You don't have any characters yet, let's create one !</p>
       <table class="table" *ngIf="user.characters && user.characters.length > 0">
@@ -49,9 +48,12 @@
           <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
         </div>
         <br>
-        <button class="button is-primary" (click)="createCharacter()">Create a new character</button>
+        <button class="button is-primary" (click)="createCharacter()">
+          <span class="icon">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+          </span>
+          <span>Create a new character</span>
+        </button>
       </div>
-    </div>
-
   </section>
 </div>

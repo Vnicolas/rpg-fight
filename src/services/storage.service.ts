@@ -7,7 +7,7 @@ export class StorageService {
 
   constructor() {
     if (!window.localStorage) {
-      console.warn('localStorage is not avalaible, this site will not work as expected.')
+      console.warn('localStorage is not avalaible, this site will not work as expected.');
     }
   }
 
