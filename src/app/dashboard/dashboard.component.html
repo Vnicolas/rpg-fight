@@ -12,8 +12,23 @@
 <div *ngIf="user" class="container">
   <section class="column is-half is-offset-one-quarter">
       <h1 class="title is-1">Characters List</h1>
-      <p *ngIf="user.characters && user.characters.length === 0">You don't have any characters yet, let's create one !</p>
-      <table class="table" *ngIf="user.characters && user.characters.length > 0">
+      <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
+      <div *ngIf="user.characters.length < 10" class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+        </div>
+        <br>
+        <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>
+        <button class="button is-primary" (click)="createCharacter()">
+          <span class="icon">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+          </span>
+          <span>Create a new character</span>
+        </button>
+      </div>
+      <hr>
+      <table class="table" *ngIf="user.characters.length > 0">
         <thead>
           <tr>
             <th></th>
@@ -41,19 +56,5 @@
           </tr>
         </tbody>
       </table>
-      <hr>
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
-        </div>
-        <br>
-        <button class="button is-primary" (click)="createCharacter()">
-          <span class="icon">
-            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-          </span>
-          <span>Create a new character</span>
-        </button>
-      </div>
   </section>
 </div>
