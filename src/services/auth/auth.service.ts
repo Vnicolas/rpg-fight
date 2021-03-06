@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user';
-import { backendUrl, handleHttpErrors } from 'src/app/shared/utils';
+import { handleHttpErrors } from 'src/app/shared/utils';
 import { StorageService } from '../storage.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   }
 
   signup(name: string, password: string): Observable<User> {
-    return this.http.post<User>(`${backendUrl}users`, {name, password})
+    return this.http.post<User>(`${environment.backendUrl}users`, {name, password})
     .pipe(
       first(),
       catchError(handleHttpErrors)
@@ -25,7 +26,7 @@ export class AuthService {
   }
 
   signin(name: string, password: string): Observable<User> {
-    return this.http.post<User>(`${backendUrl}users/login`, {name, password})
+    return this.http.post<User>(`${environment.backendUrl}users/login`, {name, password})
     .pipe(
       first(),
       catchError(handleHttpErrors)
