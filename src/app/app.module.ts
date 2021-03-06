@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardService } from 'src/services/auth/auth-guard.service';
 import { AuthService } from 'src/services/auth/auth.service';
 import { CharacterInfosComponent } from './character-infos/character-infos.component';
+import { CharactersListComponent } from './characters-list/characters-list.component';
 
 library.add(fas);
 
@@ -23,7 +24,8 @@ library.add(fas);
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    CharacterInfosComponent
+    CharacterInfosComponent,
+    CharactersListComponent
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,41 @@
+<div class="table-container">
+  <table class="table is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Rank</th>
+        <th>Attack</th>
+        <th>Defense</th>
+        <th>Magik</th>
+        <th>Fights</th>
+        <th>Skill Points</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let character of characters" class="has-text-centered">
+        <td>
+          <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
+        </td>
+        <td class="has-text-weight-bold">{{ character.name }}</td>
+        <td class="is-family-monospace">{{ character.rank }}</td>
+        <td class="is-family-monospace">{{ character.attack }}</td>
+        <td class="is-family-monospace">{{ character.defense }}</td>
+        <td class="is-family-monospace">{{ character.magik }}</td>
+        <td class="is-family-monospace">{{ character.fights.length }}</td>
+        <td class="is-family-monospace">{{ character.skillPoints }}</td>
+        <td>
+          <span [ngClass]="getStatusClass(character.status)">{{ character.status }}</span>
+        </td>
+        <td><button class="button is-small">
+          <span class="icon">
+            <fa-icon [icon]="['fas', 'times']"></fa-icon>
+          </span>
+          <span>Delete</span>
+        </button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

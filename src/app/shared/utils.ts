@@ -6,7 +6,7 @@ export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
 }
 
 export enum CharacterStatus {
-  IN_FIGHT = 'InFight',
+  IN_FIGHT = 'In Fight',
   AVAILABLE = 'Available',
-  RESTING = 'Resting ',
+  RESTING = 'Resting',
 }

@@ -12,4 +12,5 @@ export interface Character {
   defense: number;
   magik: number;
   fights: Fight[];
+  status: string;
 }

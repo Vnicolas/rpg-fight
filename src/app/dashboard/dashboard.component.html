@@ -9,52 +9,28 @@
   </div>
 </nav>
 
-<div *ngIf="user" class="container">
-  <section class="column is-half is-offset-one-quarter">
-      <h1 class="title is-1">Characters List</h1>
-      <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
-      <div *ngIf="user.characters.length < 10" class="field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
-        </div>
-        <br>
-        <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>
-        <button class="button is-primary" (click)="createCharacter()">
-          <span class="icon">
-            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-          </span>
-          <span>Create a new character</span>
-        </button>
+<div *ngIf="user" class="columns is-centered">
+  <section class="section">
+    <h1 class="title is-1">Characters List</h1>
+    <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
+    <div *ngIf="user.characters.length < 10" class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
       </div>
-      <hr>
-      <table class="table" *ngIf="user.characters.length > 0">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Rank</th>
-            <th>Attack</th>
-            <th>Defense</th>
-            <th>Magik</th>
-            <th>Fights</th>
-            <th>Skill Pts</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let character of user.characters">
-            <td>
-              <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
-            </td>
-            <td>{{ character.name }}</td>
-            <td>{{ character.rank }}</td>
-            <td>{{ character.attack }}</td>
-            <td>{{ character.defense }}</td>
-            <td>{{ character.magik }}</td>
-            <td>{{ character.fights.length }}</td>
-            <td>{{ character.skillPoints }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <br>
+      <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>
+      <button class="button is-primary" (click)="createCharacter()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        </span>
+        <span>Create a new character</span>
+      </button>
+    </div>
+    <hr>
+    <app-characters-list
+      *ngIf="user.characters.length > 0"
+      [characters]="user.characters">
+    </app-characters-list>
   </section>
 </div>
