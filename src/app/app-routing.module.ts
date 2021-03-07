@@ -7,7 +7,7 @@ import {
 } from '../services/auth/auth-guard.service';
 import { CharacterUpdateComponent } from './character-update/character-update.component';
 import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
-import { CharacterInfosComponent } from './character-infos/character-infos.component';
+import { CharacterResolver } from './resolvers/character.resolver';
 
 const routes: Routes = [
   {
@@ -29,13 +29,11 @@ const routes: Routes = [
       {
         path: 'character-update/:id',
         component: CharacterUpdateComponent,
+        resolve: {
+          character: CharacterResolver
+        },
         canActivate: [AuthGuard]
-      },
-      {
-        path: '',
-        redirectTo: '/characters',
-        pathMatch: 'full'
-      },
+      }
     ]
   },
   { path: '**', redirectTo: '/home' }

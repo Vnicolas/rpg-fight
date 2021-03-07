@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { UserService } from 'src/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,8 +18,6 @@ import { CharacterUpdateComponent } from './character-update/character-update.co
 import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
 import { CharacterCreateComponent } from './character-create/character-create.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
-library.add(fas);
 
 @NgModule({
   declarations: [
