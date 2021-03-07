@@ -31,6 +31,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageService.getItem('account', true);
+    this.makeCharacterPicturesSafe();
+  }
+
+  private makeCharacterPicturesSafe(): void {
     this.user.characters.map((character: Character) => {
       character.pictureSafe = this.sanitizer.bypassSecurityTrustHtml(character.picture);
       return character;
@@ -47,7 +51,7 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    this.userService.createUserCharacter(this.newCharacterName, this.user.id).subscribe((character: Character) => {
+    this.userService.createUserCharacter(this.newCharacterName, this.user._id).subscribe((character: Character) => {
       character.pictureSafe = this.sanitizer.bypassSecurityTrustHtml(character.picture);
       this.user.characters.push(character);
       this.storageService.setItem('account', this.user, true);
@@ -55,5 +59,17 @@ export class DashboardComponent implements OnInit {
       this.errorMessage = error;
     });
   }
+
+  public deleteCharacter(characterId: string): void {
+    this.userService.deleteUserCharacter(characterId, this.user._id).subscribe((user: User) => {
+      this.user = user;
+      this.makeCharacterPicturesSafe();
+      this.storageService.setItem('account', this.user, true);
+    }, (error: string) => {
+      this.errorMessage = error;
+    });
+  }
+
+
 
 }

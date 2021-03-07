@@ -6,7 +6,7 @@ export interface UserPayload {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   characters: Character[];
 }

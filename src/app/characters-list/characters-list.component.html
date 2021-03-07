@@ -29,12 +29,14 @@
         <td>
           <span [ngClass]="getStatusClass(character.status)">{{ character.status }}</span>
         </td>
-        <td><button class="button is-small">
-          <span class="icon">
-            <fa-icon [icon]="['fas', 'times']"></fa-icon>
-          </span>
-          <span>Delete</span>
-        </button></td>
+        <td>
+          <button class="button is-small" (click)="deleteCharacter(character._id)">
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'times']"></fa-icon>
+            </span>
+            <span>Delete</span>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

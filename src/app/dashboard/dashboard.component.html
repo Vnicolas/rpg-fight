@@ -13,6 +13,7 @@
   <section class="section">
     <h1 class="title is-1">Characters List</h1>
     <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
+    <hr>
     <div *ngIf="user.characters.length < 10" class="field">
       <label class="label">Name</label>
       <div class="control">
@@ -27,9 +28,9 @@
         <span>Create a new character</span>
       </button>
     </div>
-    <hr>
     <app-characters-list
       *ngIf="user.characters.length > 0"
+      (deleteEvent)="deleteCharacter($event)"
       [characters]="user.characters">
     </app-characters-list>
   </section>
