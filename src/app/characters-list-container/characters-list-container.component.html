@@ -1,0 +1,17 @@
+<div class="columns is-centered">
+  <section class="section">
+    <h1 class="title is-1">Your characters</h1>
+    <div class="block">
+      <app-character-create
+        [userId]="user._id"
+        [charactersLength]="user.characters.length"
+        (characterCreated)="updateUser($event)">
+      </app-character-create>
+    </div>
+    <div class="block">
+      <app-characters-list
+        [user]="user">
+      </app-characters-list>
+    </div>
+  </section>
+</div>

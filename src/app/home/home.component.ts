@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   private goToDashboard(): void {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/dashboard/characters');
   }
 
   public signup(): void {

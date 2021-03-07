@@ -1,0 +1,10 @@
+<nav *ngIf="user" class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <span class="user-name">{{ user.name }}</span>
+    </div>
+    <div class="navbar-item">
+      <button class="button" (click)="signOut()">Sign out</button>
+    </div>
+  </div>
+</nav>

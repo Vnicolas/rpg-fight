@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let character of characters" class="has-text-centered">
+      <tr *ngFor="let character of user.characters" class="has-text-centered">
         <td>
           <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
         </td>
@@ -25,9 +25,11 @@
         <td class="is-family-monospace">{{ character.defense }}</td>
         <td class="is-family-monospace">{{ character.magik }}</td>
         <td class="is-family-monospace">{{ character.fights.length }}</td>
-        <td class="is-family-monospace">{{ character.skillPoints }}</td>
+        <td class="is-family-monospace">
+          <a [routerLink]="['/dashboard/characters', character._id]">{{ character.skillPoints }}</a>
+        </td>
         <td>
-          <span class="tag" [ngClass]="getStatusClass(character.status)">{{ character.status }}</span>
+          <span class="tag {{ character.statusClass }}">{{ character.status }}</span>
         </td>
         <td>
           <div class="field has-addons">
@@ -53,3 +55,10 @@
     </tbody>
   </table>
 </div>
+
+<app-character-infos
+  *ngIf="characterSelected"
+  [isActive]="isCharacterModalActive"
+  [character]="characterSelected"
+  (closeEvent)="isCharacterModalActive = false">
+</app-character-infos>

@@ -16,6 +16,10 @@ import { AuthGuardService } from 'src/services/auth/auth-guard.service';
 import { AuthService } from 'src/services/auth/auth.service';
 import { CharacterInfosComponent } from './character-infos/character-infos.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
+import { CharacterUpdateComponent } from './character-update/character-update.component';
+import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
+import { CharacterCreateComponent } from './character-create/character-create.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 library.add(fas);
 
@@ -25,7 +29,11 @@ library.add(fas);
     HomeComponent,
     DashboardComponent,
     CharacterInfosComponent,
-    CharactersListComponent
+    CharactersListComponent,
+    CharacterUpdateComponent,
+    CharactersListContainerComponent,
+    CharacterCreateComponent,
+    NavbarComponent
   ],
   imports: [
     FormsModule,

@@ -6,11 +6,16 @@ import { User } from 'src/app/interfaces/user';
 import { handleHttpErrors } from 'src/app/shared/utils';
 import { StorageService } from '../storage.service';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient, public storageService: StorageService) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService,
+    private router: Router
+    ) {}
 
   public isAuthenticated(): boolean {
     const token = this.storageService.getItem('account', true);
@@ -31,5 +36,10 @@ export class AuthService {
       first(),
       catchError(handleHttpErrors)
     );
+  }
+
+  logout(): void {
+    this.storageService.removeItem('account');
+    this.router.navigateByUrl('/home');
   }
 }

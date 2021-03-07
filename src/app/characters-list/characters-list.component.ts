@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Character } from '../interfaces/character';
-import { getStatusClass } from '../shared/utils';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
+import { User } from '../interfaces/user';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-characters-list',
@@ -11,31 +12,45 @@ import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
 })
 export class CharactersListComponent implements OnInit {
 
-  @Input()
-  characters: Character[] = [];
+  public errorMessage = '';
+  public newCharacterName = '';
+  public characterSelected!: Character;
+  public isCharacterModalActive = false;
 
-  @Output()
-  deleteEvent = new EventEmitter<string>();
+  @Input()
+  user!: User;
 
   @Output()
   viewEvent = new EventEmitter<string>();
 
-  constructor(library: FaIconLibrary) {
+  constructor(
+    library: FaIconLibrary,
+    private userService: UserService) {
     library.addIcons(faTimes, faIdCard);
   }
 
   ngOnInit(): void {
-  }
 
-  public getStatusClass(characterStatus: string): any {
-    return getStatusClass(characterStatus);
   }
 
   public deleteCharacter(characterId: string): void {
-    this.deleteEvent.emit(characterId);
+    this.errorMessage = '';
+    this.userService.deleteUserCharacter(characterId, this.user._id).subscribe((user: User) => {
+      this.userService.updateUser(user);
+    }, (error: string) => {
+      this.errorMessage = error;
+    });
   }
 
   public viewCharacter(characterId: string): void {
-    this.viewEvent.emit(characterId);
+    this.errorMessage = '';
+    const characterSelected = this.user.characters.find((character: Character) => character._id === characterId);
+    if (!characterSelected) {
+      this.errorMessage = 'This character does not exist !';
+      return;
+    }
+    this.characterSelected = characterSelected;
+    this.isCharacterModalActive = true;
   }
+
 }
