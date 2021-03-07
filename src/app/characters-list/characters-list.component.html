@@ -27,15 +27,27 @@
         <td class="is-family-monospace">{{ character.fights.length }}</td>
         <td class="is-family-monospace">{{ character.skillPoints }}</td>
         <td>
-          <span [ngClass]="getStatusClass(character.status)">{{ character.status }}</span>
+          <span class="tag" [ngClass]="getStatusClass(character.status)">{{ character.status }}</span>
         </td>
         <td>
-          <button class="button is-small" (click)="deleteCharacter(character._id)">
-            <span class="icon">
-              <fa-icon [icon]="['fas', 'times']"></fa-icon>
-            </span>
-            <span>Delete</span>
-          </button>
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-info is-small" (click)="viewCharacter(character._id)">
+                <span class="icon">
+                  <fa-icon [icon]="['fas', 'id-card']"></fa-icon>
+                </span>
+                <span>View</span>
+              </button>
+            </p>
+            <p class="control">
+              <button class="button is-danger is-small" (click)="deleteCharacter(character._id)">
+                <span class="icon">
+                  <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                </span>
+                <span>Delete</span>
+              </button>
+            </p>
+          </div>
         </td>
       </tr>
     </tbody>

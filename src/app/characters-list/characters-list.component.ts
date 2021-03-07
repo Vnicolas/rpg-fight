@@ -1,10 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Character } from '../interfaces/character';
-import { CharacterStatus } from '../shared/utils';
+import { getStatusClass } from '../shared/utils';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from 'src/services/user.service';
-import { User } from '../interfaces/user';
+import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-characters-list',
@@ -19,31 +17,25 @@ export class CharactersListComponent implements OnInit {
   @Output()
   deleteEvent = new EventEmitter<string>();
 
+  @Output()
+  viewEvent = new EventEmitter<string>();
 
-  constructor(library: FaIconLibrary, private userService: UserService) {
-    library.addIcons(faTimes);
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faTimes, faIdCard);
   }
 
   ngOnInit(): void {
   }
 
   public getStatusClass(characterStatus: string): any {
-    if (!characterStatus) {
-      return {
-        tag: true,
-        'is-white': true
-      }
-    }
-    return {
-      tag: true,
-      'is-success': characterStatus === CharacterStatus.AVAILABLE,
-      'is-warning': characterStatus === CharacterStatus.IN_FIGHT,
-      'is-light': characterStatus === CharacterStatus.RESTING
-    };
+    return getStatusClass(characterStatus);
   }
 
   public deleteCharacter(characterId: string): void {
     this.deleteEvent.emit(characterId);
   }
 
+  public viewCharacter(characterId: string): void {
+    this.viewEvent.emit(characterId);
+  }
 }

@@ -10,3 +10,24 @@ export enum CharacterStatus {
   AVAILABLE = 'Available',
   RESTING = 'Resting',
 }
+
+export function getStatusClass(characterStatus: string): string {
+  let classToReturn = '';
+  switch (characterStatus) {
+    case undefined:
+      classToReturn = 'is-white';
+      break;
+    case CharacterStatus.AVAILABLE:
+      classToReturn = 'is-success';
+      break;
+    case CharacterStatus.IN_FIGHT:
+      classToReturn = 'is-warning';
+      break;
+    case CharacterStatus.RESTING:
+      classToReturn = 'is-light';
+      break;
+    default:
+      break;
+  }
+  return classToReturn;
+}

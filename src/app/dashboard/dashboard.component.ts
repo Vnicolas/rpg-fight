@@ -7,6 +7,7 @@ import { Character } from '../interfaces/character';
 import { Router } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { getStatusClass } from '../shared/utils';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class DashboardComponent implements OnInit {
   public errorMessage = '';
   public user!: User;
   public newCharacterName = '';
+  public characterSelected!: Character;
+  public isCharacterModalActive = false;
 
   constructor(
     library: FaIconLibrary,
@@ -31,12 +34,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storageService.getItem('account', true);
-    this.makeCharacterPicturesSafe();
+    this.setCharacterDisplayInformations();
   }
 
-  private makeCharacterPicturesSafe(): void {
+  private setCharacterDisplayInformations(): void {
     this.user.characters.map((character: Character) => {
       character.pictureSafe = this.sanitizer.bypassSecurityTrustHtml(character.picture);
+      character.statusClass = getStatusClass(character.status);
       return character;
     });
   }
@@ -47,7 +51,9 @@ export class DashboardComponent implements OnInit {
   }
 
   public createCharacter(): void {
+    this.errorMessage = '';
     if (!this.newCharacterName) {
+      this.errorMessage = 'Please give a name';
       return;
     }
 
@@ -55,21 +61,32 @@ export class DashboardComponent implements OnInit {
       character.pictureSafe = this.sanitizer.bypassSecurityTrustHtml(character.picture);
       this.user.characters.push(character);
       this.storageService.setItem('account', this.user, true);
+      this.newCharacterName = '';
     }, (error: string) => {
       this.errorMessage = error;
     });
   }
 
   public deleteCharacter(characterId: string): void {
+    this.errorMessage = '';
     this.userService.deleteUserCharacter(characterId, this.user._id).subscribe((user: User) => {
       this.user = user;
-      this.makeCharacterPicturesSafe();
+      this.setCharacterDisplayInformations();
       this.storageService.setItem('account', this.user, true);
     }, (error: string) => {
       this.errorMessage = error;
     });
   }
 
-
+  public viewCharacter(characterId: string): void {
+    this.errorMessage = '';
+    const characterSelected = this.user.characters.find((character: Character) => character._id === characterId);
+    if (!characterSelected) {
+      this.errorMessage = 'This character does not exist !';
+      return;
+    }
+    this.characterSelected = characterSelected;
+    this.isCharacterModalActive = true;
+  }
 
 }

@@ -11,27 +11,42 @@
 
 <div *ngIf="user" class="columns is-centered">
   <section class="section">
-    <h1 class="title is-1">Characters List</h1>
+    <!-- Put into a component -->
+    <h1 class="title is-1">Your characters</h1>
     <p *ngIf="user.characters.length === 0">You don't have any characters yet, let's create one !</p>
     <hr>
     <div *ngIf="user.characters.length < 10" class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+      <div class="block">
+        <label class="label">Name</label>
+        <div class="control">
+          <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+        </div>
+        <p class="help is-danger">{{ errorMessage }}</p>
       </div>
-      <br>
-      <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>
-      <button class="button is-primary" (click)="createCharacter()">
-        <span class="icon">
-          <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-        </span>
-        <span>Create a new character</span>
-      </button>
+      <div class="block">
+        <button class="button is-primary" (click)="createCharacter()">
+          <span class="icon">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+          </span>
+          <span>Create a new character</span>
+        </button>
+      </div>
     </div>
-    <app-characters-list
-      *ngIf="user.characters.length > 0"
-      (deleteEvent)="deleteCharacter($event)"
-      [characters]="user.characters">
-    </app-characters-list>
+    <!-- Put into a component (end) -->
+    <div class="block">
+      <app-characters-list
+        *ngIf="user.characters.length > 0"
+        (deleteEvent)="deleteCharacter($event)"
+        (viewEvent)="viewCharacter($event)"
+        [characters]="user.characters">
+      </app-characters-list>
+    </div>
   </section>
 </div>
+
+<app-character-infos
+  *ngIf="characterSelected"
+  [isActive]="isCharacterModalActive"
+  [character]="characterSelected"
+  (closeEvent)="isCharacterModalActive = false">
+</app-character-infos>
