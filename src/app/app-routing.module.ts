@@ -33,7 +33,12 @@ const routes: Routes = [
           character: CharacterResolver
         },
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: '',
+        redirectTo: 'characters',
+        pathMatch: 'full'
+      },
     ]
   },
   { path: '**', redirectTo: '/home' }
