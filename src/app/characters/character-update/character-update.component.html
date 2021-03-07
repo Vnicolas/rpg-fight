@@ -1,0 +1,43 @@
+<div class="columns is-centered">
+  <section class="section">
+    <div class="character-picture is-centered" [innerHtml]="character.pictureSafe"></div>
+    <h1 class="title is-1 has-text-centered">{{ character.name }} - Rank
+      <span class="is-family-monospace">{{ character.rank }}</span>
+    </h1>
+
+    <div class="block is-size-2">
+      Skill points available :
+      <span class="is-family-monospace">{{ character.skillPoints }}</span>
+    </div>
+
+    <app-skill-updater
+      skill="health"
+      [pointsAvailable]="character.skillPoints"
+      [points]="character.health">
+    </app-skill-updater>
+    <app-skill-updater
+      skill="attack"
+      [pointsAvailable]="character.skillPoints"
+      [points]="character.attack">
+    </app-skill-updater>
+    <app-skill-updater
+      skill="defense"
+      [pointsAvailable]="character.skillPoints"
+      [points]="character.defense">
+    </app-skill-updater>
+    <app-skill-updater
+      skill="magik"
+      [pointsAvailable]="character.skillPoints"
+      [points]="character.magik">
+    </app-skill-updater>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link">Submit</button>
+      </div>
+      <div class="control">
+        <button class="button is-link is-light">Cancel</button>
+      </div>
+    </div>
+  </section>
+</div>

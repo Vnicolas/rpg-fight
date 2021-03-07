@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/services/user.service';
-import { Character } from '../interfaces/character';
-import { User } from '../interfaces/user';
+import { Character } from '../../interfaces/character';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-characters-list-container',

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Character } from '../interfaces/character';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { Character } from '../../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
-import { User } from '../interfaces/user';
+import { User } from '../../interfaces/user';
 import { UserService } from 'src/services/user.service';
 import { Subscription } from 'rxjs';
 
@@ -21,9 +21,6 @@ export class CharactersListComponent implements OnDestroy {
 
   @Input()
   user!: User;
-
-  @Output()
-  viewEvent = new EventEmitter<string>();
 
   constructor(
     library: FaIconLibrary,

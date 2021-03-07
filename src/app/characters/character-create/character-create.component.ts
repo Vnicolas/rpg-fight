@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { UserService } from 'src/services/user.service';
-import { Character } from '../interfaces/character';
+import { Character } from '../../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';

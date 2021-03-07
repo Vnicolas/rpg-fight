@@ -32,6 +32,9 @@ export class UserService {
   }
 
   updateUser(user: User): void {
+    if (!user) {
+      return this.user.next({} as User);
+    }
     user.characters = user.characters.map((character: Character) => {
       character = this.setCharacterDisplayInformations(character);
       return character;

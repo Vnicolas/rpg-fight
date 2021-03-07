@@ -6,6 +6,7 @@ import { User } from '../interfaces/user';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     library: FaIconLibrary,
     private authService: AuthService,
     private storageService: StorageService,
+    private userService: UserService,
     private router: Router) {
       library.addIcons(faUser, faKey);
     }
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.subscriptions.add(
       this.authService.signup(this.username, this.password).subscribe((user: User) => {
-        this.storageService.setItem('account', user, true);
+        this.userService.updateUser(user);
         this.goToDashboard();
       }, (error: string) => {
         this.errorMessage = error;
@@ -62,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.subscriptions.add(
       this.authService.signin(this.username, this.password).subscribe((user: User) => {
-        this.storageService.setItem('account', user, true);
+        this.userService.updateUser(user);
         this.goToDashboard();
       }, (error: string) => {
         this.errorMessage = error;

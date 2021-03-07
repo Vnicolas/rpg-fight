@@ -5,8 +5,8 @@ import { HomeComponent } from './home/home.component';
 import {
   AuthGuardService as AuthGuard
 } from '../services/auth/auth-guard.service';
-import { CharacterUpdateComponent } from './character-update/character-update.component';
-import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
+import { CharacterUpdateComponent } from './characters/character-update/character-update.component';
+import { CharactersListContainerComponent } from './characters/characters-list-container/characters-list-container.component';
 import { CharacterResolver } from './resolvers/character.resolver';
 
 const routes: Routes = [

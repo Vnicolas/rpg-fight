@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { Character } from '../interfaces/character';
+import { Character } from '../../interfaces/character';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character-update',
@@ -9,13 +10,12 @@ import { Character } from '../interfaces/character';
 })
 export class CharacterUpdateComponent implements OnInit {
 
-  // TODO: wip
   character!: Character;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe((data: Data) => {
+    this.route.data.pipe(first()).subscribe((data: Data) => {
       this.character = data.character;
     });
   }

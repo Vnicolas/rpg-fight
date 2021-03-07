@@ -29,10 +29,10 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-primary" (click)="signup()">Sign up</button>
+          <button class="button is-primary" (click)="signin()">Sign in</button>
         </div>
         <div class="control">
-          <button class="button" (click)="signin()">Sign in</button>
+          <button class="button is-text" (click)="signup()">Sign up</button>
         </div>
       </div>
       <p *ngIf="errorMessage"class="help is-danger">{{ errorMessage }}</p>

@@ -12,33 +12,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuardService } from 'src/services/auth/auth-guard.service';
 import { AuthService } from 'src/services/auth/auth.service';
-import { CharacterInfosComponent } from './character-infos/character-infos.component';
-import { CharactersListComponent } from './characters-list/characters-list.component';
-import { CharacterUpdateComponent } from './character-update/character-update.component';
-import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
-import { CharacterCreateComponent } from './character-create/character-create.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CharactersModule } from './characters/characters.module';
+import { SkillsService } from 'src/services/skills.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    CharacterInfosComponent,
-    CharactersListComponent,
-    CharacterUpdateComponent,
-    CharactersListContainerComponent,
-    CharacterCreateComponent,
     NavbarComponent
   ],
   imports: [
+    CharactersModule,
     FormsModule,
     FontAwesomeModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AuthGuardService, UserService],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    UserService,
+    SkillsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
