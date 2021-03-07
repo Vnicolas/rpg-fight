@@ -1,21 +1,23 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Character } from '../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../interfaces/user';
 import { UserService } from 'src/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-characters-list',
   templateUrl: './characters-list.component.html',
   styleUrls: ['./characters-list.component.scss']
 })
-export class CharactersListComponent implements OnInit {
+export class CharactersListComponent implements OnDestroy {
 
   public errorMessage = '';
   public newCharacterName = '';
   public characterSelected!: Character;
   public isCharacterModalActive = false;
+  private subscriptions = new Subscription();
 
   @Input()
   user!: User;
@@ -29,17 +31,15 @@ export class CharactersListComponent implements OnInit {
     library.addIcons(faTimes, faIdCard);
   }
 
-  ngOnInit(): void {
-
-  }
-
   public deleteCharacter(characterId: string): void {
     this.errorMessage = '';
-    this.userService.deleteUserCharacter(characterId, this.user._id).subscribe((user: User) => {
-      this.userService.updateUser(user);
-    }, (error: string) => {
-      this.errorMessage = error;
-    });
+    this.subscriptions.add(
+      this.userService.deleteUserCharacter(characterId, this.user._id).subscribe((user: User) => {
+        this.userService.updateUser(user);
+      }, (error: string) => {
+        this.errorMessage = error;
+      })
+    );
   }
 
   public viewCharacter(characterId: string): void {
@@ -53,4 +53,7 @@ export class CharactersListComponent implements OnInit {
     this.isCharacterModalActive = true;
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

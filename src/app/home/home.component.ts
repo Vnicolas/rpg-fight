@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 import { StorageService } from 'src/services/storage.service';
 import { User } from '../interfaces/user';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
+  private subscriptions = new Subscription();
 
   public username = '';
   public password = '';
@@ -41,12 +44,15 @@ export class HomeComponent implements OnInit {
     if (!this.checkFields()) {
       return;
     }
-    this.authService.signup(this.username, this.password).subscribe((user: User) => {
-      this.storageService.setItem('account', user, true);
-      this.goToDashboard();
-    }, (error: string) => {
-      this.errorMessage = error;
-    });
+    this.subscriptions.add(
+      this.authService.signup(this.username, this.password).subscribe((user: User) => {
+        this.storageService.setItem('account', user, true);
+        this.goToDashboard();
+      }, (error: string) => {
+        this.errorMessage = error;
+      })
+    )
+
   }
 
   public signin(): void {
@@ -54,12 +60,14 @@ export class HomeComponent implements OnInit {
     if (!this.checkFields()) {
       return;
     }
-    this.authService.signin(this.username, this.password).subscribe((user: User) => {
-      this.storageService.setItem('account', user, true);
-      this.goToDashboard();
-    }, (error: string) => {
-      this.errorMessage = error;
-    });
+    this.subscriptions.add(
+      this.authService.signin(this.username, this.password).subscribe((user: User) => {
+        this.storageService.setItem('account', user, true);
+        this.goToDashboard();
+      }, (error: string) => {
+        this.errorMessage = error;
+      })
+    );
   }
 
   public checkFields(): boolean {
@@ -68,6 +76,10 @@ export class HomeComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 }
