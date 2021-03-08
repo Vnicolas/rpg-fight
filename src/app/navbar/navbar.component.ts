@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { first } from 'rxjs/operators';
 import { AuthService } from 'src/services/auth/auth.service';
 import { UserService } from 'src/services/user.service';
@@ -12,8 +14,11 @@ import { User } from '../interfaces/user';
 export class NavbarComponent implements OnInit {
 
   constructor(
+    library: FaIconLibrary,
     private authService: AuthService,
-    private userService: UserService) { }
+    private userService: UserService) {
+      library.addIcons(faSignOutAlt);
+    }
 
   public user!: User;
 

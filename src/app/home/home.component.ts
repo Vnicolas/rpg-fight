@@ -37,10 +37,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  private goToDashboard(): void {
-    this.router.navigateByUrl('/dashboard/characters');
-  }
-
   public signup(): void {
     this.errorMessage = '';
     if (!this.checkFields()) {
@@ -77,6 +73,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       return false;
     }
     return true;
+  }
+
+  private goToDashboard(): void {
+    this.router.navigateByUrl('/dashboard/characters');
   }
 
   ngOnDestroy(): void {

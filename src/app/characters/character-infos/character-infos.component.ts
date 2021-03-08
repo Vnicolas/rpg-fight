@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Character } from '../../interfaces/character';
 
 @Component({
@@ -6,7 +6,7 @@ import { Character } from '../../interfaces/character';
   templateUrl: './character-infos.component.html',
   styleUrls: ['./character-infos.component.scss']
 })
-export class CharacterInfosComponent implements OnInit {
+export class CharacterInfosComponent {
 
   @Input()
   isActive = false;
@@ -18,8 +18,6 @@ export class CharacterInfosComponent implements OnInit {
   closeEvent = new EventEmitter<void>();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   close(): void {
     this.closeEvent.emit();
