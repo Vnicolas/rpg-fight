@@ -4,14 +4,9 @@ import { Character } from '../../interfaces/character';
 import { first } from 'rxjs/operators';
 import { SkillsService } from 'src/services/skills.service';
 import { CharacterFightProperty } from 'src/app/shared/utils';
-import { CharacterResolver } from 'src/app/resolvers/character.resolver';
-
 
 export interface Points {
-  health: number;
-  attack: number;
-  defense: number;
-  magik: number;
+  [key: string]: number;
 }
 
 @Component({
@@ -25,6 +20,7 @@ export class CharacterUpdateComponent implements OnInit {
   public initialPoints!: Points;
   public finalPoints!: Points;
   public pointsToAdd!: Points;
+  public lastPointsAdded!: Points;
   public pointsAvailable = 0;
 
   constructor(private route: ActivatedRoute, private skillsService: SkillsService) { }
@@ -36,7 +32,7 @@ export class CharacterUpdateComponent implements OnInit {
     });
   }
 
-  private initPoints(params: Points, value?: number): Points {
+  private initPoints(params: Character |Points, value?: number): Points {
     if (value === undefined) {
       return {
         health: Number(params.health),
@@ -57,7 +53,7 @@ export class CharacterUpdateComponent implements OnInit {
   private initAllPoints(character: Character): void {
     this.pointsAvailable = Number(character.skillPoints);
     this.initialPoints = this.initPoints(character);
-    const params = {
+    const params: Points = {
       health: character.health,
       attack: character.attack,
       defense: character.defense,
@@ -65,6 +61,7 @@ export class CharacterUpdateComponent implements OnInit {
     };
     this.finalPoints = this.initPoints(params);
     this.pointsToAdd = this.initPoints(params, 0);
+    this.lastPointsAdded = this.initPoints(params, 0);
   }
 
   private addHealthPoint(): void {
@@ -74,6 +71,7 @@ export class CharacterUpdateComponent implements OnInit {
         this.pointsToAdd.health,
         this.initialPoints.health
       );
+      this.lastPointsAdded.health = points.pointsToAdd;
       this.pointsAvailable = points.pointsAvailable;
       this.pointsToAdd.health = points.pointsToAdd;
       this.finalPoints.health = points.finalPoints;
@@ -81,53 +79,59 @@ export class CharacterUpdateComponent implements OnInit {
   }
 
   private removeHealthPoint(): void {
-    if (this.skillsService.canRemoveHealthPoint(this.initialPoints.health, this.pointsToAdd.health)) {
+    if (this.skillsService.canRemovePoint(this.initialPoints.health, this.lastPointsAdded.health)) {
       const points = this.skillsService.removeHealthPoint(
         this.pointsAvailable,
         this.pointsToAdd.health,
         this.finalPoints.health
       );
+      this.lastPointsAdded.health = points.pointsToAdd;
       this.pointsAvailable = points.pointsAvailable;
       this.pointsToAdd.health = points.pointsToAdd;
       this.finalPoints.health = points.finalPoints;
     }
   }
 
+  private addPoint(skill: string): void {
+    if (this.skillsService.canAddPoints(this.pointsAvailable)) {
+      const points = this.skillsService.addPoint(
+        this.pointsAvailable,
+        this.pointsToAdd[skill]
+      );
+      this.lastPointsAdded[skill] = points.pointsToAdd;
+      this.pointsAvailable = points.pointsAvailable;
+      this.pointsToAdd[skill] = this.pointsToAdd[skill] + points.pointsToAdd;
+      this.finalPoints[skill] = points.finalPoints;
+    }
+  }
+
+  private removePoint(skill: string): void {
+    if (this.skillsService.canRemovePoint(this.initialPoints[skill], this.lastPointsAdded[skill])) {
+      const points = this.skillsService.removePoint(
+        this.pointsAvailable,
+        this.lastPointsAdded[skill],
+        this.finalPoints[skill]
+      );
+      this.lastPointsAdded[skill] = points.pointsToAdd;
+      this.pointsAvailable = points.pointsAvailable;
+      this.pointsToAdd[skill] = this.pointsToAdd[skill] - points.pointsToAdd;
+      this.finalPoints[skill] = points.finalPoints;
+    }
+  }
+
   public addPoints(skill: string): void {
-    switch (skill) {
-      case CharacterFightProperty.HEALTH:
-        this.addHealthPoint();
-        break;
-      case CharacterFightProperty.ATTAK:
-
-       break;
-      case CharacterFightProperty.DEFENSE:
-
-        break;
-      case CharacterFightProperty.MAGIK:
-
-        break;
-      default:
-        break;
+    if (skill === CharacterFightProperty.HEALTH) {
+      this.addHealthPoint();
+    } else {
+      this.addPoint(skill);
     }
   }
 
   public removePoints(skill: string): void {
-    switch (skill) {
-      case CharacterFightProperty.HEALTH:
-        this.removeHealthPoint();
-        break;
-      case CharacterFightProperty.ATTAK:
-
-       break;
-      case CharacterFightProperty.DEFENSE:
-
-        break;
-      case CharacterFightProperty.MAGIK:
-
-        break;
-      default:
-        break;
+    if (skill === CharacterFightProperty.HEALTH) {
+      this.removeHealthPoint();
+    } else {
+      this.removePoint(skill);
     }
   }
 

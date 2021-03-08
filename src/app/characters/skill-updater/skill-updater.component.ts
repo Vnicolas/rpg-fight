@@ -22,7 +22,7 @@ export class SkillUpdaterComponent {
   addPoints = new EventEmitter<void>();
 
   @Output()
-  removePoints = new EventEmitter<void>();
+  removePoints = new EventEmitter<number>();
 
   constructor(library: FaIconLibrary) {
     library.addIcons(faPlus, faMinus);
