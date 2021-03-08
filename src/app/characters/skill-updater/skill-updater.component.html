@@ -2,7 +2,7 @@
   <div class="field is-grouped is-justify-content-space-between">
     <label class="label is-capitalized">{{ skill }} :
       <span class="is-family-monospace">{{ initialPoints }}</span>
-      <span *ngIf="pointsToAdd > 0" class="is-family-monospace"> => {{ finalPoints }}</span>
+      <span *ngIf="pointsToAdd > 0" class="is-family-monospace"> => {{ initialPoints + pointsToAdd }}</span>
     </label>
     <span class="is-flex">
       <p class="control">

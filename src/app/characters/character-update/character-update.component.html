@@ -12,23 +12,31 @@
 
     <app-skill-updater
       skill="health"
-      [pointsAvailable]="character.skillPoints"
-      [points]="character.health">
+      [initialPoints]="character.health"
+      [pointsToAdd]="pointsToAdd.health"
+      (addPoints)="addPoints('health')"
+      (removePoints)="removePoints('health')">
     </app-skill-updater>
     <app-skill-updater
       skill="attack"
-      [pointsAvailable]="character.skillPoints"
-      [points]="character.attack">
+      [initialPoints]="character.attack"
+      [pointsToAdd]="pointsToAdd.attack"
+      (addPoints)="addPoints('attack')"
+      (removePoints)="removePoints('attack')">
     </app-skill-updater>
     <app-skill-updater
       skill="defense"
-      [pointsAvailable]="character.skillPoints"
-      [points]="character.defense">
+      [initialPoints]="character.defense"
+      [pointsToAdd]="pointsToAdd.defense"
+      (addPoints)="addPoints('defense')"
+      (removePoints)="removePoints('defense')">
     </app-skill-updater>
     <app-skill-updater
       skill="magik"
-      [pointsAvailable]="character.skillPoints"
-      [points]="character.magik">
+      [initialPoints]="character.magik"
+      [pointsToAdd]="pointsToAdd.magik"
+      (addPoints)="addPoints('magik')"
+      (removePoints)="removePoints('magik')">
     </app-skill-updater>
 
     <div class="field is-grouped">

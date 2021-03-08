@@ -5,10 +5,17 @@ export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
   return throwError(error.error.message);
 }
 
-export enum CharacterStatus {
+export const enum CharacterStatus {
   IN_FIGHT = 'In Fight',
   AVAILABLE = 'Available',
   RESTING = 'Resting',
+}
+
+export const enum CharacterFightProperty {
+  HEALTH = 'health',
+  ATTAK = 'attack',
+  DEFENSE = 'defense',
+  MAGIK = 'magik',
 }
 
 export function getStatusClass(characterStatus: string): string {

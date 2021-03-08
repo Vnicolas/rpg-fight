@@ -32,11 +32,12 @@ export class SkillsService {
   }
 
   public canAddHealthPoint(pointsAvailable: number): boolean {
-    return pointsAvailable - 1 >= 0;
+    return pointsAvailable > 0;
   }
 
-  public canRemoveHealthPoint(initialPoints: number, pointsAvailable: number): boolean {
-    return initialPoints - (-pointsAvailable) >= 0;
+  public canRemoveHealthPoint(initialPoints: number, pointsToAdd: number): boolean {
+    const futurePointsToAdd = pointsToAdd - 1;
+    return initialPoints + futurePointsToAdd >= initialPoints;
   }
 
   public canAddPoints(currentPoints: number): boolean {
