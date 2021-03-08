@@ -28,7 +28,9 @@
         <td class="is-family-monospace">{{ character.magik }}</td>
         <td class="is-family-monospace">{{ character.fights.length }}</td>
         <td class="is-family-monospace">
-          <a [routerLink]="['/dashboard/character-update', character._id]">{{ character.skillPoints }}</a>
+          <button
+            [routerLink]="['/dashboard/character-update', character._id]"
+            class="button is-rounded">{{ character.skillPoints }}</button>
         </td>
         <td>
           <span class="tag {{ character.statusClass }}">{{ character.status }}</span>
