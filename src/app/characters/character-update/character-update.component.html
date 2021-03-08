@@ -38,14 +38,18 @@
       (addPoints)="addPoints('magik')"
       (removePoints)="removePoints('magik')">
     </app-skill-updater>
-
+    <hr>
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link">Submit</button>
+        <button class="button is-rounded is-success" (click)="update()">Submit</button>
       </div>
       <div class="control">
-        <button class="button is-link is-light">Cancel</button>
+        <button
+          class="button is-rounded is-warning"
+          [routerLink]="['/dashboard']">Cancel
+        </button>
       </div>
+      <p *ngIf="errorMessage" class="help is-danger">{{ errorMessage }}</p>
     </div>
   </section>
 </div>

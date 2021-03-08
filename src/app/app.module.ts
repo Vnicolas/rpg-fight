@@ -15,6 +15,7 @@ import { AuthService } from 'src/services/auth/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CharactersModule } from './characters/characters.module';
 import { SkillsService } from 'src/services/skills.service';
+import { CharactersService } from 'src/services/characters.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SkillsService } from 'src/services/skills.service';
     AuthService,
     AuthGuardService,
     UserService,
+    CharactersService,
     SkillsService
   ],
   bootstrap: [AppComponent]

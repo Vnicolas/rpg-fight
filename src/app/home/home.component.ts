@@ -53,8 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, (error: string) => {
         this.errorMessage = error;
       })
-    )
-
+    );
   }
 
   public signin(): void {

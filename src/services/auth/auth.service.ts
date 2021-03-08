@@ -8,7 +8,9 @@ import { StorageService } from '../storage.service';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
 
   constructor(

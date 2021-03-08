@@ -18,6 +18,10 @@ export const enum CharacterFightProperty {
   MAGIK = 'magik',
 }
 
+export interface Points {
+  [key: string]: number;
+}
+
 export function getStatusClass(characterStatus: string): string {
   let classToReturn = '';
   switch (characterStatus) {
