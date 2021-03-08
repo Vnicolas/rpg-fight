@@ -61,7 +61,7 @@ export class SkillsService {
       const pointsAdded = initialPoints + amount;
       return pointsAdded - initialPoints >= 0;
     }
-    return initialPoints - amount >= 0;
+    return initialPoints - (-amount) >= 0 && amount > 0;
   }
 
   public canAddPoints(pointsAvailable: number): boolean {
