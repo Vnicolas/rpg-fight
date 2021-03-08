@@ -38,6 +38,9 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.data.pipe(first()).subscribe((data: Data) => {
       this.character = data.character;
+      if (this.character.skillPoints === 0) {
+        this.goToDashboard();
+      }
       this.initAllPoints(this.character);
     });
     this.subscriptions.add(
