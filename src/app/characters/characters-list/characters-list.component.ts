@@ -3,7 +3,7 @@ import { Character } from '../../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../../interfaces/user';
-import { UserService } from 'src/services/user.service';
+import { UserService } from 'services/user.service';
 import { Subscription } from 'rxjs';
 
 @Component({

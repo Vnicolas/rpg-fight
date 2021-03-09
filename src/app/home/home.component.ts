@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/services/auth/auth.service';
-import { StorageService } from 'src/services/storage.service';
+import { StorageService } from 'services/storage.service';
 import { User } from '../interfaces/user';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { UserService } from 'src/services/user.service';
+import { UserService } from 'services/user.service';
+import { AuthService } from 'services/auth/auth.service';
 
 @Component({
   selector: 'app-home',

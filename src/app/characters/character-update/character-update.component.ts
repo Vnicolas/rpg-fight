@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Character } from '../../interfaces/character';
 import { first } from 'rxjs/operators';
-import { SkillsService } from 'src/services/skills.service';
-import { CharacterFightProperty, Points } from 'src/app/shared/utils';
-import { CharactersService } from 'src/services/characters.service';
-import { UserService } from 'src/services/user.service';
+import { SkillsService } from 'services/skills.service';
+import { CharacterFightProperty, Points } from 'app/shared/utils';
+import { CharactersService } from 'services/characters.service';
+import { UserService } from 'services/user.service';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'app/interfaces/user';
 
 @Component({
   selector: 'app-character-update',

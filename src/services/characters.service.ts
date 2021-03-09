@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Character } from 'src/app/interfaces/character';
-import { handleHttpErrors, Points } from 'src/app/shared/utils';
+import { Character } from 'app/interfaces/character';
+import { handleHttpErrors, Points } from 'app/shared/utils';
 import { environment } from '../environments/environment';
 
 @Injectable({

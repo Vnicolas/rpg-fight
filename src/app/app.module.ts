@@ -7,15 +7,15 @@ import { HomeComponent } from './home/home.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { UserService } from 'src/services/user.service';
+import { UserService } from 'services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardService } from 'src/services/auth/auth-guard.service';
-import { AuthService } from 'src/services/auth/auth.service';
+import { AuthGuardService } from 'services/auth/auth-guard.service';
+import { AuthService } from 'services/auth/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CharactersModule } from './characters/characters.module';
-import { SkillsService } from 'src/services/skills.service';
-import { CharactersService } from 'src/services/characters.service';
+import { SkillsService } from 'services/skills.service';
+import { CharactersService } from 'services/characters.service';
 import { PipesModule } from './shared/pipes/pipes.module';
 
 @NgModule({
