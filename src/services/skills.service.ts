@@ -33,7 +33,8 @@ export class SkillsService {
 
   public removePoint(pointsAvailable: number, pointsToAdd: number, finalPoints: number): any {
     pointsAvailable = pointsAvailable + pointsToAdd;
-    finalPoints = finalPoints - pointsToAdd;
+    pointsToAdd = Math.ceil(pointsAvailable / 5);
+    finalPoints--;
     return {
       pointsAvailable,
       pointsToAdd,
@@ -42,12 +43,14 @@ export class SkillsService {
   }
 
   public addPoint(pointsAvailable: number, initialPoints: number): any {
-    const futurePointsToAdd = Math.ceil(pointsAvailable / 5);
-    const futurePointsAvailable = pointsAvailable - futurePointsToAdd;
+    const pointdAdded = Math.ceil(pointsAvailable / 5);
+    const futurePointsToAdd = 1;
+    const futurePointsAvailable = pointsAvailable - pointdAdded;
     const finalPoints = initialPoints + futurePointsToAdd;
     return {
       pointsAvailable: futurePointsAvailable,
       pointsToAdd: futurePointsToAdd,
+      pointsAdded: pointdAdded,
       finalPoints
     };
   }

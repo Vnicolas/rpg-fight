@@ -157,7 +157,7 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
         this.pointsAvailable,
         this.pointsToAdd[skill]
       );
-      this.lastPointsAdded[skill] = points.pointsToAdd;
+      this.lastPointsAdded[skill] = points.pointsAdded;
       this.pointsAvailable = points.pointsAvailable;
       this.pointsToAdd[skill] = this.pointsToAdd[skill] + points.pointsToAdd;
       this.finalPoints[skill] = points.finalPoints;
@@ -173,7 +173,7 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
       );
       this.lastPointsAdded[skill] = points.pointsToAdd;
       this.pointsAvailable = points.pointsAvailable;
-      this.pointsToAdd[skill] = this.pointsToAdd[skill] - points.pointsToAdd;
+      this.pointsToAdd[skill] = points.finalPoints;
       this.finalPoints[skill] = points.finalPoints;
     }
   }

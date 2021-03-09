@@ -6,8 +6,9 @@ export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
 }
 
 export const enum CharacterStatus {
+  NOT_READY = 'Not Ready',
+  READY = 'Ready',
   IN_FIGHT = 'In Fight',
-  AVAILABLE = 'Available',
   RESTING = 'Resting',
 }
 
@@ -28,7 +29,10 @@ export function getStatusClass(characterStatus: string): string {
     case undefined:
       classToReturn = 'is-white';
       break;
-    case CharacterStatus.AVAILABLE:
+    case CharacterStatus.NOT_READY:
+      classToReturn = 'is-dark';
+      break;
+    case CharacterStatus.READY:
       classToReturn = 'is-success';
       break;
     case CharacterStatus.IN_FIGHT:
