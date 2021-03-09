@@ -3,7 +3,7 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Character } from '../../interfaces/character';
 import { first } from 'rxjs/operators';
 import { SkillsService } from 'services/skills.service';
-import { CharacterFightProperty, Points } from 'app/shared/utils';
+import { CharacterFightProperty, Points, Skills } from 'app/shared/utils';
 import { CharactersService } from 'services/characters.service';
 import { UserService } from 'services/user.service';
 import { Subscription } from 'rxjs';
@@ -20,11 +20,9 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   character!: Character;
-  public initialPoints!: Points;
-  public finalPoints!: Points;
-  public pointsToAdd!: Points;
-  public lastPointsAdded!: Points;
-  public pointsAvailable = 0;
+  public pointsAvailable!: number;
+  public skills: Skills = {};
+
   public errorMessage = '';
 
   constructor(
@@ -41,7 +39,7 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
       if (this.character.skillPoints === 0) {
         this.goToDashboard();
       }
-      this.initAllPoints(this.character);
+      this.initSkills(this.character);
     });
     this.subscriptions.add(
       this.userService.user.subscribe((user: User) => {
@@ -68,10 +66,10 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
 
   public update(): void {
     const payload = {
-      health: this.finalPoints.health,
-      attack: this.finalPoints.attack,
-      defense: this.finalPoints.defense,
-      magik: this.finalPoints.magik,
+      health: this.skills.health.finalPoints,
+      attack: this.skills.attack.finalPoints,
+      defense: this.skills.defense.finalPoints,
+      magik: this.skills.magik.finalPoints,
       skillPoints: this.pointsAvailable
     };
     this.charactersService.updatePoints(this.character._id, payload)
@@ -91,90 +89,57 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/dashboard/characters');
   }
 
-  private initPoints(params: Character |Points, value?: number): Points {
-    if (value === undefined) {
-      return {
-        health: Number(params.health),
-        attack: Number(params.attack),
-        defense: Number(params.defense),
-        magik: Number(params.magik),
-      };
-    }
+  private initSkill(initialValue: number): Points {
     return {
-      health: value || 0,
-      attack: value || 0,
-      defense: value || 0,
-      magik: value || 0,
+      initialPoints: initialValue,
+      finalPoints: initialValue,
+      costs: []
     };
-
   }
 
-  private initAllPoints(character: Character): void {
+  private initSkills(character: Character): void {
     this.pointsAvailable = Number(character.skillPoints);
-    this.initialPoints = this.initPoints(character);
-    const params: Points = {
-      health: character.health,
-      attack: character.attack,
-      defense: character.defense,
-      magik: character.magik,
-    };
-    this.finalPoints = this.initPoints(params);
-    this.pointsToAdd = this.initPoints(params, 0);
-    this.lastPointsAdded = this.initPoints(params, 0);
+    this.skills.health = this.initSkill(this.character.health);
+    this.skills.attack = this.initSkill(this.character.attack);
+    this.skills.defense = this.initSkill(this.character.defense);
+    this.skills.magik = this.initSkill(this.character.magik);
   }
 
   private addHealthPoint(): void {
-    if (this.skillsService.canAddHealthPoint(this.pointsAvailable)) {
-      const points = this.skillsService.addHealthPoint(
-        this.pointsAvailable,
-        this.pointsToAdd.health,
-        this.initialPoints.health
-      );
-      this.lastPointsAdded.health = points.pointsToAdd;
-      this.pointsAvailable = points.pointsAvailable;
-      this.pointsToAdd.health = points.pointsToAdd;
-      this.finalPoints.health = points.finalPoints;
-    }
-  }
-
-  private removeHealthPoint(): void {
-    if (this.skillsService.canRemovePoint(this.initialPoints.health, this.lastPointsAdded.health)) {
-      const points = this.skillsService.removeHealthPoint(
-        this.pointsAvailable,
-        this.pointsToAdd.health,
-        this.finalPoints.health
-      );
-      this.lastPointsAdded.health = points.pointsToAdd;
-      this.pointsAvailable = points.pointsAvailable;
-      this.pointsToAdd.health = points.pointsToAdd;
-      this.finalPoints.health = points.finalPoints;
+    if (this.pointsAvailable > 0) {
+      this.pointsAvailable--;
+      this.skills.health.finalPoints++;
     }
   }
 
   private addPoint(skill: string): void {
     if (this.skillsService.canAddPoints(this.pointsAvailable)) {
-      const points = this.skillsService.addPoint(
-        this.pointsAvailable,
-        this.pointsToAdd[skill]
-      );
-      this.lastPointsAdded[skill] = points.pointsAdded;
-      this.pointsAvailable = points.pointsAvailable;
-      this.pointsToAdd[skill] = this.pointsToAdd[skill] + points.pointsToAdd;
-      this.finalPoints[skill] = points.finalPoints;
+      const pointsToAdd = this.skillsService.getDivided(this.pointsAvailable);
+      this.pointsAvailable = this.pointsAvailable - pointsToAdd;
+      this.skills[skill].finalPoints++;
+      this.skills[skill].costs.push(pointsToAdd);
     }
   }
 
+  private canRemovePoint(skill: string): boolean {
+    return this.skillsService.canRemovePoints(
+      this.skills[skill].initialPoints,
+      this.skills[skill].finalPoints);
+  }
+
   private removePoint(skill: string): void {
-    if (this.skillsService.canRemovePoint(this.initialPoints[skill], this.lastPointsAdded[skill])) {
-      const points = this.skillsService.removePoint(
-        this.pointsAvailable,
-        this.lastPointsAdded[skill],
-        this.finalPoints[skill]
-      );
-      this.lastPointsAdded[skill] = points.pointsToAdd;
-      this.pointsAvailable = points.pointsAvailable;
-      this.pointsToAdd[skill] = points.finalPoints;
-      this.finalPoints[skill] = points.finalPoints;
+    if (this.canRemovePoint(skill)) {
+      const pointsToRemove = this.skills[skill].costs[this.skills[skill].costs.length - 1];
+      this.pointsAvailable = this.pointsAvailable + pointsToRemove;
+      this.skills[skill].finalPoints--;
+      this.skills[skill].costs.pop();
+    }
+  }
+
+  private removeHealthPoint(): void {
+    if (this.canRemovePoint('health')) {
+      this.pointsAvailable++;
+      this.skills.health.finalPoints--;
     }
   }
 

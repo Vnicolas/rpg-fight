@@ -16,7 +16,7 @@ export class SkillUpdaterComponent {
   initialPoints!: number;
 
   @Input()
-  pointsToAdd!: number;
+  finalPoints!: number;
 
   @Output()
   addPoints = new EventEmitter<void>();

@@ -1,4 +1,4 @@
-<div class="columns is-centered">
+<div *ngIf="skills" class="columns is-centered">
   <section class="section">
     <div class="character-picture is-centered" [innerHtml]="character.picture | safeHtml"></div>
     <h1 class="title is-1 has-text-centered">{{ character.name }} - Rank
@@ -13,28 +13,28 @@
     <app-skill-updater
       skill="health"
       [initialPoints]="character.health"
-      [pointsToAdd]="pointsToAdd.health"
+      [finalPoints]="skills.health.finalPoints"
       (addPoints)="addPoints('health')"
       (removePoints)="removePoints('health')">
     </app-skill-updater>
     <app-skill-updater
       skill="attack"
       [initialPoints]="character.attack"
-      [pointsToAdd]="pointsToAdd.attack"
+      [finalPoints]="skills.attack.finalPoints"
       (addPoints)="addPoints('attack')"
       (removePoints)="removePoints('attack')">
     </app-skill-updater>
     <app-skill-updater
       skill="defense"
       [initialPoints]="character.defense"
-      [pointsToAdd]="pointsToAdd.defense"
+      [finalPoints]="skills.defense.finalPoints"
       (addPoints)="addPoints('defense')"
       (removePoints)="removePoints('defense')">
     </app-skill-updater>
     <app-skill-updater
       skill="magik"
       [initialPoints]="character.magik"
-      [pointsToAdd]="pointsToAdd.magik"
+      [finalPoints]="skills.magik.finalPoints"
       (addPoints)="addPoints('magik')"
       (removePoints)="removePoints('magik')">
     </app-skill-updater>

@@ -20,7 +20,25 @@ export const enum CharacterFightProperty {
 }
 
 export interface Points {
+  initialPoints: number;
+  finalPoints: number;
+  costs: number[];
+}
+
+export interface Skills {
+  [key: string]: Points;
+}
+
+export interface Point {
   [key: string]: number;
+}
+
+export interface PointsCost {
+  [key: string]: number[];
+}
+
+export function getDivided(amount: number): number {
+  return Math.ceil(amount / 5);
 }
 
 export function getStatusClass(characterStatus: string): string {

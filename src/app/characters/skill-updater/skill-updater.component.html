@@ -2,20 +2,20 @@
   <div class="field is-grouped is-justify-content-space-between">
     <label class="label is-capitalized">{{ skill }} :
       <span class="is-family-monospace">{{ initialPoints }}</span>
-      <span *ngIf="pointsToAdd > 0" class="is-family-monospace"> => {{ initialPoints + pointsToAdd }}</span>
+      <span *ngIf="finalPoints > initialPoints" class="is-family-monospace"> => {{ finalPoints }}</span>
     </label>
     <span class="is-flex">
-      <p class="control">
-        <button class="button is-rounded" (click)="addPoint()">
-          <span class="icon">
-            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
-          </span>
-        </button>
-      </p>
       <p class="control">
         <button class="button is-rounded" (click)="removePoint()">
           <span class="icon">
             <fa-icon [icon]="['fas', 'minus']"></fa-icon>
+          </span>
+        </button>
+      </p>
+      <p class="control">
+        <button class="button is-rounded" (click)="addPoint()">
+          <span class="icon">
+            <fa-icon [icon]="['fas', 'plus']"></fa-icon>
           </span>
         </button>
       </p>
