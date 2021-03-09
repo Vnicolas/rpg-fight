@@ -1,4 +1,4 @@
-<div *ngIf="skills" class="columns is-centered">
+<div *ngIf="character && skills" class="columns is-centered">
   <section class="section">
     <div class="character-picture is-centered" [innerHtml]="character.picture | safeHtml"></div>
     <h1 class="title is-1 has-text-centered">{{ character.name }} - Rank

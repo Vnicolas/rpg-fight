@@ -7,7 +7,6 @@ import { getStatusClass, handleHttpErrors } from 'app/shared/utils';
 import { environment } from '../environments/environment';
 import { User } from 'app/interfaces/user';
 import { StorageService } from './storage.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +21,6 @@ export class UserService {
     ) {
     const account = this.storageService.getItem('account', true);
     this.updateUser(account);
-  }
-
-  private setCharacterDisplayInformations(character: Character): Character {
-    character.statusClass = getStatusClass(character.status);
-    return character;
   }
 
   updateUser(user: User): void {
@@ -58,4 +52,10 @@ export class UserService {
       catchError(handleHttpErrors)
     );
   }
+
+  private setCharacterDisplayInformations(character: Character): Character {
+    character.statusClass = getStatusClass(character.status);
+    return character;
+  }
+
 }

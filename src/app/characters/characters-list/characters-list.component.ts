@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Character } from '../../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faTimes, faIdCard } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faIdCard, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../../interfaces/user';
 import { UserService } from 'services/user.service';
 import { Subscription } from 'rxjs';
+import { CharactersService } from 'services/characters.service';
 
 @Component({
   selector: 'app-characters-list',
@@ -16,6 +17,7 @@ export class CharactersListComponent implements OnDestroy {
   public errorMessage = '';
   public newCharacterName = '';
   public characterSelected!: Character;
+  public fighterSelected!: Character;
   public isCharacterModalActive = false;
   private subscriptions = new Subscription();
 
@@ -24,8 +26,9 @@ export class CharactersListComponent implements OnDestroy {
 
   constructor(
     library: FaIconLibrary,
-    private userService: UserService) {
-    library.addIcons(faTimes, faIdCard);
+    private userService: UserService,
+    private characterService: CharactersService) {
+    library.addIcons(faTimes, faIdCard, faCheckCircle, faDotCircle);
   }
 
   public deleteCharacter(characterId: string): void {
@@ -48,6 +51,16 @@ export class CharactersListComponent implements OnDestroy {
     }
     this.characterSelected = characterSelected;
     this.isCharacterModalActive = true;
+  }
+
+  public select(character: Character): void {
+    if (this.fighterSelected?._id === character._id) {
+      this.fighterSelected = undefined as unknown as Character;
+      this.characterService.unSelectFighter();
+      return;
+    }
+    this.fighterSelected = character;
+    this.characterService.selectFighter(character);
   }
 
   ngOnDestroy(): void {

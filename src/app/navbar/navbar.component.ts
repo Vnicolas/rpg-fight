@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { first } from 'rxjs/operators';
-import { AuthService } from 'services/auth/auth.service';
+import { AuthService } from 'services/auth.service';
 import { UserService } from 'services/user.service';
 import { User } from '../interfaces/user';
 

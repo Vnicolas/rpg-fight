@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th></th>
+        <th></th>
         <th>Name</th>
         <th>Rank</th>
         <th>Health</th>
@@ -17,6 +18,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let character of user.characters" class="has-text-centered">
+        <td>
+          <button
+          class="button is-rounded"
+          [disabled]="character.status !== 'Ready'"
+          [class.is-success]="fighterSelected?._id === character._id"
+          (click)="select(character)">
+            <fa-icon
+              *ngIf="fighterSelected && fighterSelected._id === character._id"
+              [icon]="['fas', 'check-circle']">
+            </fa-icon>
+            <fa-icon
+              *ngIf="!fighterSelected || (fighterSelected && fighterSelected._id !== character._id)"
+              [icon]="['fas', 'dot-circle']">
+            </fa-icon>
+          </button>
+        </td>
         <td>
           <div class="character-picture" [innerHTML]="character.picture | safeHtml"></div>
         </td>

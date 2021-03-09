@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { Character } from 'app/interfaces/character';
 import { handleHttpErrors, Point } from 'app/shared/utils';
 import { environment } from '../environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharactersService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private storageService: StorageService) {}
 
   updatePoints(characterId: string, points: Point): Observable<Character> {
     const url = `${environment.backendUrl}characters/${characterId}`;
@@ -20,5 +21,13 @@ export class CharactersService {
       first(),
       catchError(handleHttpErrors)
     );
+  }
+
+  selectFighter(character: Character): void {
+    this.storageService.setItem('fighter', character, true);
+  }
+
+  unSelectFighter(): void {
+    this.storageService.removeItem('fighter');
   }
 }

@@ -6,7 +6,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { UserService } from 'services/user.service';
-import { AuthService } from 'services/auth/auth.service';
+import { AuthService } from 'services/auth.service';
 
 @Component({
   selector: 'app-home',

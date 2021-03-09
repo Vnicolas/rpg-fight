@@ -10,20 +10,26 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from 'services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardService } from 'services/auth/auth-guard.service';
-import { AuthService } from 'services/auth/auth.service';
+import { AuthGuardService } from 'app/guards/auth.guard';
+import { AuthService } from 'services/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CharactersModule } from './characters/characters.module';
 import { SkillsService } from 'services/skills.service';
 import { CharactersService } from 'services/characters.service';
 import { PipesModule } from './shared/pipes/pipes.module';
+import { LobbyComponent } from './lobby/lobby.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { WSService } from 'services/ws.service';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000'};
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    LobbyComponent
   ],
   imports: [
     PipesModule,
@@ -32,14 +38,16 @@ import { PipesModule } from './shared/pipes/pipes.module';
     FontAwesomeModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     AuthService,
     AuthGuardService,
     UserService,
     CharactersService,
-    SkillsService
+    SkillsService,
+    WSService
   ],
   bootstrap: [AppComponent]
 })
