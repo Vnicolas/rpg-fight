@@ -7,7 +7,7 @@ import { getStatusClass, handleHttpErrors } from 'src/app/shared/utils';
 import { environment } from '../environments/environment';
 import { User } from 'src/app/interfaces/user';
 import { StorageService } from './storage.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +18,13 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService,
-    private sanitizer: DomSanitizer
+    private storageService: StorageService
     ) {
     const account = this.storageService.getItem('account', true);
     this.updateUser(account);
   }
 
   private setCharacterDisplayInformations(character: Character): Character {
-    character.pictureSafe = this.sanitizer.bypassSecurityTrustHtml(character.picture);
     character.statusClass = getStatusClass(character.status);
     return character;
   }

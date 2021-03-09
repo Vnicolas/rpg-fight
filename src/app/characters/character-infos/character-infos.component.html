@@ -6,7 +6,7 @@
       <button class="delete" aria-label="close" (click)="close()"></button>
     </header>
     <section class="modal-card-body has-text-centered">
-      <div class="block character-picture" [innerHtml]="character.pictureSafe"></div>
+      <div class="block character-picture" [innerHtml]="character.picture | safeHtml"></div>
       <div class="content">
         <p class="tag {{ character.statusClass }}">{{ character.status }}</p>
         <p>Rank : <span class="is-family-monospace">{{ character.rank }}</span></p>

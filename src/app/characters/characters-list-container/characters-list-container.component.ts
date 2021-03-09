@@ -24,7 +24,7 @@ export class CharactersListContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  updateUser(character: Character): void {
+  public updateUser(character: Character): void {
     this.user.characters.push(character);
     this.userService.updateUser(this.user);
   }

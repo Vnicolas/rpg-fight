@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let character of user.characters" class="has-text-centered">
         <td>
-          <div class="character-picture" [innerHTML]="character.pictureSafe"></div>
+          <div class="character-picture" [innerHTML]="character.picture | safeHtml"></div>
         </td>
         <td class="has-text-weight-bold">{{ character.name }}</td>
         <td class="is-family-monospace">{{ character.rank }}</td>

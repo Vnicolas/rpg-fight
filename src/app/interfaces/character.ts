@@ -1,10 +1,8 @@
-import { SafeHtml } from '@angular/platform-browser';
 import { Fight } from './fight';
 
 export interface Character {
   _id: string;
   picture: string;
-  pictureSafe: SafeHtml;
   name: string;
   rank: number;
   skillPoints: number;

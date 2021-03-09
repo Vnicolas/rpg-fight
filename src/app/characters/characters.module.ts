@@ -12,6 +12,7 @@ import { CharacterUpdateComponent } from './character-update/character-update.co
 import { CharactersListContainerComponent } from './characters-list-container/characters-list-container.component';
 import { CharacterCreateComponent } from './character-create/character-create.component';
 import { SkillUpdaterComponent } from './skill-updater/skill-updater.component';
+import { PipesModule } from '../shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SkillUpdaterComponent } from './skill-updater/skill-updater.component';
     SkillUpdaterComponent
   ],
   imports: [
+    PipesModule,
     FormsModule,
     FontAwesomeModule,
     BrowserModule,

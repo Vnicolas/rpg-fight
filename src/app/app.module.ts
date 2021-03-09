@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CharactersModule } from './characters/characters.module';
 import { SkillsService } from 'src/services/skills.service';
 import { CharactersService } from 'src/services/characters.service';
+import { PipesModule } from './shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CharactersService } from 'src/services/characters.service';
     NavbarComponent
   ],
   imports: [
+    PipesModule,
     CharactersModule,
     FormsModule,
     FontAwesomeModule,
