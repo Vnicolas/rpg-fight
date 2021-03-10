@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Character } from "app/interfaces/character";
+import { OpponentData } from "app/interfaces/fight";
 import { Socket } from "ngx-socket-io";
 import { Observable } from "rxjs";
 
@@ -8,11 +10,19 @@ import { Observable } from "rxjs";
 export class WSService {
   constructor(private socket: Socket) {}
 
-  searchOpponent(): Observable<string> {
+  searchOpponent(userId: string, fighter: Character): void {
+    this.socket.emit("search-opponent", { userId, fighter });
+  }
+
+  searchingOpponent(): Observable<void> {
     return this.socket.fromEvent("searching");
   }
 
-  // getUsers(): void{
-  //   return this.socket.fromEvent('users');
-  // }
+  connected(): Observable<void> {
+    return this.socket.fromEvent("connected");
+  }
+
+  opponentFound(): Observable<OpponentData> {
+    return this.socket.fromEvent("opponent-found");
+  }
 }

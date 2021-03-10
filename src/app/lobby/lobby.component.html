@@ -8,8 +8,8 @@
   <div class="column is-full has-text-centered">
     <div class="turn is-size-1">
       <ng-container *ngIf="!isLoading">
-        Turn :
-        <span class="is-family-monospace">{{ currentTurn }}</span>
+        Turn
+        <span class="is-family-monospace"> {{ currentTurn }}</span>
       </ng-container>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <div class="section">
   <div class="columns">
-    <div class="column is-align-self-center">
+    <div class="column is-align-self-center first-fighter">
       <app-fighter-card
         *ngIf="user && fighter"
         [ownerName]="user.name"
@@ -30,17 +30,19 @@
         <img src="../../assets/yellow-thunder.png" />
       </figure>
     </div>
-    <div class="column is-align-self-center">
+    <div class="column is-align-self-center second-fighter">
       <app-fighter-card
         *ngIf="opponentFighter"
-        [ownerName]="opponentFighter.ownerName"
+        [ownerName]="opponentOwnerName"
         [fighter]="opponentFighter"
       >
       </app-fighter-card>
-      <div class="content has-text-centered">Searching opponent ...</div>
-      <div class="box" *ngIf="!opponentFighter">
-        <progress class="progress is-small is-info" max="100"></progress>
-      </div>
+      <ng-container *ngIf="isLoading">
+        <div class="content has-text-centered">Searching opponent ...</div>
+        <div class="box" *ngIf="!opponentFighter">
+          <progress class="progress is-small is-info" max="100"></progress>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

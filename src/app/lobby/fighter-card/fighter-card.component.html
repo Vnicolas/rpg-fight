@@ -14,31 +14,30 @@
         class="fighter-picture"
         [innerHTML]="fighter.picture | safeHtml"
       ></div>
-      <div class="health-points is-size-2">
+      <div class="is-size-2">
         HP :
-        <span
-          class="is-family-monospace has-text-danger has-text-weight-bold"
-          >{{ fighter.health }}</span
-        >
+        <span class="is-family-monospace has-text-danger has-text-weight-bold">
+          {{ fighter.health }}
+        </span>
       </div>
       <ul class="no-bullets">
         <li>
           Attack :
-          <span class="is-family-monospace has-text-weight-bold">{{
-            fighter.attack
-          }}</span>
+          <span class="is-family-monospace has-text-weight-bold">
+            {{ fighter.attack }}
+          </span>
         </li>
         <li>
           Defense :
-          <span class="is-family-monospace has-text-weight-bold">{{
-            fighter.defense
-          }}</span>
+          <span class="is-family-monospace has-text-weight-bold">
+            {{ fighter.defense }}
+          </span>
         </li>
         <li>
           Magik :
-          <span class="is-family-monospace has-text-weight-bold">{{
-            fighter.magik
-          }}</span>
+          <span class="is-family-monospace has-text-weight-bold">
+            {{ fighter.magik }}
+          </span>
         </li>
       </ul>
     </div>
