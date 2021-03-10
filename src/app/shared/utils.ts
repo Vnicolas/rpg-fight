@@ -1,22 +1,22 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
 
 export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
   return throwError(error.error.message);
 }
 
 export const enum CharacterStatus {
-  NOT_READY = 'Not Ready',
-  READY = 'Ready',
-  IN_FIGHT = 'In Fight',
-  RESTING = 'Resting',
+  NOT_READY = "Not Ready",
+  READY = "Ready",
+  IN_FIGHT = "In Fight",
+  RESTING = "Resting",
 }
 
 export const enum CharacterFightProperty {
-  HEALTH = 'health',
-  ATTAK = 'attack',
-  DEFENSE = 'defense',
-  MAGIK = 'magik',
+  HEALTH = "health",
+  ATTAK = "attack",
+  DEFENSE = "defense",
+  MAGIK = "magik",
 }
 
 export interface Points {
@@ -42,22 +42,22 @@ export function getDivided(amount: number): number {
 }
 
 export function getStatusClass(characterStatus: string): string {
-  let classToReturn = '';
+  let classToReturn = "";
   switch (characterStatus) {
     case undefined:
-      classToReturn = 'is-white';
+      classToReturn = "is-white";
       break;
     case CharacterStatus.NOT_READY:
-      classToReturn = 'is-dark';
+      classToReturn = "is-dark";
       break;
     case CharacterStatus.READY:
-      classToReturn = 'is-success';
+      classToReturn = "is-success";
       break;
     case CharacterStatus.IN_FIGHT:
-      classToReturn = 'is-warning';
+      classToReturn = "is-warning";
       break;
     case CharacterStatus.RESTING:
-      classToReturn = 'is-light';
+      classToReturn = "is-light";
       break;
     default:
       break;

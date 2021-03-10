@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { getDivided } from 'app/shared/utils';
+import { Injectable } from "@angular/core";
+import { getDivided } from "app/shared/utils";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SkillsService {
-
   constructor() {}
 
   public canRemovePoints(initialPoints: number, amount: number): boolean {

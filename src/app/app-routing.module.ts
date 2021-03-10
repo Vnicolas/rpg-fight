@@ -1,58 +1,56 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
-import {
-  AuthGuardService as AuthGuard
-} from './guards/auth.guard';
-import { CharacterUpdateComponent } from './characters/character-update/character-update.component';
-import { CharactersListContainerComponent } from './characters/characters-list-container/characters-list-container.component';
-import { CharacterResolver } from './resolvers/character.resolver';
-import { LobbyComponent } from './lobby/lobby.component';
-import { LobbyGuard } from './guards/lobby.guard';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { HomeComponent } from "./home/home.component";
+import { AuthGuardService as AuthGuard } from "./guards/auth.guard";
+import { CharacterUpdateComponent } from "./characters/character-update/character-update.component";
+import { CharactersListContainerComponent } from "./characters/characters-list-container/characters-list-container.component";
+import { CharacterResolver } from "./resolvers/character.resolver";
+import { LobbyComponent } from "./lobby/lobby.component";
+import { LobbyGuard } from "./guards/lobby.guard";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "/home",
+    pathMatch: "full",
   },
-  { path: 'home', component: HomeComponent},
+  { path: "home", component: HomeComponent },
   {
-    path: 'dashboard',
+    path: "dashboard",
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'characters',
+        path: "characters",
         component: CharactersListContainerComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
-        path: 'character-update/:id',
+        path: "character-update/:id",
         component: CharacterUpdateComponent,
         resolve: {
-          character: CharacterResolver
+          character: CharacterResolver,
         },
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
-        path: '',
-        redirectTo: 'characters',
-        pathMatch: 'full'
+        path: "",
+        redirectTo: "characters",
+        pathMatch: "full",
       },
-    ]
+    ],
   },
   {
-    path: 'lobby',
+    path: "lobby",
     component: LobbyComponent,
-    canActivate: [AuthGuard, LobbyGuard]
+    canActivate: [AuthGuard, LobbyGuard],
   },
-  { path: '**', redirectTo: '/home' }
+  { path: "**", redirectTo: "/home" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

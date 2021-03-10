@@ -1,14 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-skill-updater',
-  templateUrl: './skill-updater.component.html',
-  styleUrls: ['./skill-updater.component.scss']
+  selector: "app-skill-updater",
+  templateUrl: "./skill-updater.component.html",
+  styleUrls: ["./skill-updater.component.scss"],
 })
 export class SkillUpdaterComponent {
-
   @Input()
   skill!: string;
 

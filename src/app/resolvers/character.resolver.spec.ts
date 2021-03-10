@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { CharacterResolver } from './character.resolver';
+import { CharacterResolver } from "./character.resolver";
 
-describe('CharacterResolver', () => {
+describe("CharacterResolver", () => {
   let resolver: CharacterResolver;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('CharacterResolver', () => {
     resolver = TestBed.inject(CharacterResolver);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(resolver).toBeTruthy();
   });
 });

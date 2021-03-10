@@ -1,16 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserService } from 'services/user.service';
-import { Character } from '../../interfaces/character';
-import { User } from '../../interfaces/user';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
+import { UserService } from "services/user.service";
+import { Character } from "../../interfaces/character";
+import { User } from "../../interfaces/user";
 
 @Component({
-  selector: 'app-characters-list-container',
-  templateUrl: './characters-list-container.component.html',
-  styleUrls: ['./characters-list-container.component.scss']
+  selector: "app-characters-list-container",
+  templateUrl: "./characters-list-container.component.html",
+  styleUrls: ["./characters-list-container.component.scss"],
 })
 export class CharactersListContainerComponent implements OnInit, OnDestroy {
-
   public user!: User;
   private subscriptions = new Subscription();
 

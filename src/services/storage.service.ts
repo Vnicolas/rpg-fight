@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class StorageService {
-
   constructor() {
     if (!window.localStorage) {
-      console.warn('localStorage is not avalaible, this site will not work as expected.');
+      console.warn(
+        "localStorage is not avalaible, this site will not work as expected."
+      );
     }
   }
 
   getItem(itemName: string, parse = false): any {
     if (parse && localStorage.getItem(itemName)) {
-      return JSON.parse(localStorage.getItem(itemName) || '');
+      return JSON.parse(localStorage.getItem(itemName) || "");
     } else {
       return localStorage.getItem(itemName);
     }

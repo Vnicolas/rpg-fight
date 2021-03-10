@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { LobbyGuard } from './lobby.guard';
+import { LobbyGuard } from "./lobby.guard";
 
-describe('LobbyGuard', () => {
+describe("LobbyGuard", () => {
   let guard: LobbyGuard;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('LobbyGuard', () => {
     guard = TestBed.inject(LobbyGuard);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(guard).toBeTruthy();
   });
 });

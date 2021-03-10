@@ -1,28 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home.component";
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
-import { UserService } from 'services/user.service';
-import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardService } from 'app/guards/auth.guard';
-import { AuthService } from 'services/auth.service';
-import { NavbarComponent } from './navbar/navbar.component';
-import { CharactersModule } from './characters/characters.module';
-import { SkillsService } from 'services/skills.service';
-import { CharactersService } from 'services/characters.service';
-import { PipesModule } from './shared/pipes/pipes.module';
-import { LobbyComponent } from './lobby/lobby.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { WSService } from 'services/ws.service';
-import { environment } from 'environments/environment';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { FormsModule } from "@angular/forms";
+import { UserService } from "services/user.service";
+import { HttpClientModule } from "@angular/common/http";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { AuthGuardService } from "app/guards/auth.guard";
+import { AuthService } from "services/auth.service";
+import { NavbarComponent } from "./navbar/navbar.component";
+import { CharactersModule } from "./characters/characters.module";
+import { SkillsService } from "services/skills.service";
+import { CharactersService } from "services/characters.service";
+import { PipesModule } from "./shared/pipes/pipes.module";
+import { LobbyComponent } from "./lobby/lobby.component";
+import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
+import { WSService } from "services/ws.service";
+import { environment } from "environments/environment";
 
-const config: SocketIoConfig = { url: environment.backendUrl};
+const config: SocketIoConfig = { url: environment.backendUrl };
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ const config: SocketIoConfig = { url: environment.backendUrl};
     HomeComponent,
     DashboardComponent,
     NavbarComponent,
-    LobbyComponent
+    LobbyComponent,
   ],
   imports: [
     PipesModule,
@@ -40,7 +40,7 @@ const config: SocketIoConfig = { url: environment.backendUrl};
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     AuthService,
@@ -48,8 +48,8 @@ const config: SocketIoConfig = { url: environment.backendUrl};
     UserService,
     CharactersService,
     SkillsService,
-    WSService
+    WSService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
