@@ -23,6 +23,11 @@ export class CharactersService {
     );
   }
 
+
+  getFighter(): Character {
+    return this.storageService.getItem('fighter', true);
+  }
+
   selectFighter(character: Character): void {
     this.storageService.setItem('fighter', character, true);
   }

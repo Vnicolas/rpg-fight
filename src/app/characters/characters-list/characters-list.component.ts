@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Character } from '../../interfaces/character';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTimes, faIdCard, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { CharactersService } from 'services/characters.service';
   templateUrl: './characters-list.component.html',
   styleUrls: ['./characters-list.component.scss']
 })
-export class CharactersListComponent implements OnDestroy {
+export class CharactersListComponent implements OnInit, OnDestroy {
 
   public errorMessage = '';
   public newCharacterName = '';
@@ -29,6 +29,10 @@ export class CharactersListComponent implements OnDestroy {
     private userService: UserService,
     private characterService: CharactersService) {
     library.addIcons(faTimes, faIdCard, faCheckCircle, faDotCircle);
+  }
+
+  ngOnInit(): void {
+    this.fighterSelected = this.characterService.getFighter();
   }
 
   public deleteCharacter(characterId: string): void {

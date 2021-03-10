@@ -20,8 +20,9 @@ import { PipesModule } from './shared/pipes/pipes.module';
 import { LobbyComponent } from './lobby/lobby.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { WSService } from 'services/ws.service';
+import { environment } from 'environments/environment';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000'};
+const config: SocketIoConfig = { url: environment.backendUrl};
 
 @NgModule({
   declarations: [
