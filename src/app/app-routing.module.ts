@@ -8,6 +8,7 @@ import { CharactersListContainerComponent } from "./characters/characters-list-c
 import { CharacterResolver } from "./resolvers/character.resolver";
 import { LobbyComponent } from "./lobby/lobby.component";
 import { LobbyGuard } from "./guards/lobby.guard";
+import { FighterResolver } from "./resolvers/fighter.resolver";
 
 const routes: Routes = [
   {
@@ -44,6 +45,9 @@ const routes: Routes = [
   {
     path: "lobby",
     component: LobbyComponent,
+    resolve: {
+      fighterInfos: FighterResolver,
+    },
     canActivate: [AuthGuard, LobbyGuard],
   },
   { path: "**", redirectTo: "/home" },

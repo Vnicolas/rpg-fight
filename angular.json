@@ -27,11 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "node_modules/bulma/css/bulma.css",
-              "node_modules/bulma-pageloader/dist/css/bulma-pageloader.min.css",
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {

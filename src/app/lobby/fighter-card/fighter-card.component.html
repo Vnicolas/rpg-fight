@@ -1,0 +1,49 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title has-text-centered is-size-5">
+      @{{ ownerName }} / {{ fighter.name }}
+    </p>
+  </header>
+  <div class="card-content has-ribbon">
+    <div class="ribbon is-medium is-dark">
+      Rank :
+      <span class="is-family-monospace">{{ fighter.rank }}</span>
+    </div>
+    <div class="content has-text-centered">
+      <div
+        class="fighter-picture"
+        [innerHTML]="fighter.picture | safeHtml"
+      ></div>
+      <div class="health-points is-size-2">
+        HP :
+        <span
+          class="is-family-monospace has-text-danger has-text-weight-bold"
+          >{{ fighter.health }}</span
+        >
+      </div>
+      <ul class="no-bullets">
+        <li>
+          Attack :
+          <span class="is-family-monospace has-text-weight-bold">{{
+            fighter.attack
+          }}</span>
+        </li>
+        <li>
+          Defense :
+          <span class="is-family-monospace has-text-weight-bold">{{
+            fighter.defense
+          }}</span>
+        </li>
+        <li>
+          Magik :
+          <span class="is-family-monospace has-text-weight-bold">{{
+            fighter.magik
+          }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <div class="card-footer-item">Dice result : 4</div>
+  </footer>
+</div>

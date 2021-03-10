@@ -21,6 +21,7 @@ import { LobbyComponent } from "./lobby/lobby.component";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
 import { WSService } from "services/ws.service";
 import { environment } from "environments/environment";
+import { FighterCardComponent } from "./lobby/fighter-card/fighter-card.component";
 
 const config: SocketIoConfig = { url: environment.backendUrl };
 
@@ -31,6 +32,7 @@ const config: SocketIoConfig = { url: environment.backendUrl };
     DashboardComponent,
     NavbarComponent,
     LobbyComponent,
+    FighterCardComponent,
   ],
   imports: [
     PipesModule,

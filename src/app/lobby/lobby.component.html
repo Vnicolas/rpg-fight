@@ -1,4 +1,46 @@
-{{ isLoading }}
+<!-- TODO: Display (~2.5s) when fight ends, before fight results (via routing) -->
+<!-- {{ isLoading }}
 <div class="pageloader" [class.is-active]="isLoading">
   <span class="title">Searching opponent ...</span>
+</div> -->
+
+<div class="columns">
+  <div class="column is-full has-text-centered">
+    <div class="turn is-size-1">
+      <ng-container *ngIf="!isLoading">
+        Turn :
+        <span class="is-family-monospace">{{ currentTurn }}</span>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="columns">
+    <div class="column is-align-self-center">
+      <app-fighter-card
+        *ngIf="user && fighter"
+        [ownerName]="user.name"
+        [fighter]="fighter"
+      >
+      </app-fighter-card>
+    </div>
+    <div class="column">
+      <figure class="image vs-separator">
+        <img src="../../assets/yellow-thunder.png" />
+      </figure>
+    </div>
+    <div class="column is-align-self-center">
+      <app-fighter-card
+        *ngIf="opponentFighter"
+        [ownerName]="opponentFighter.ownerName"
+        [fighter]="opponentFighter"
+      >
+      </app-fighter-card>
+      <div class="content has-text-centered">Searching opponent ...</div>
+      <div class="box" *ngIf="!opponentFighter">
+        <progress class="progress is-small is-info" max="100"></progress>
+      </div>
+    </div>
+  </div>
 </div>

@@ -13,4 +13,5 @@ export interface Character {
   fights: Fight[];
   status: string;
   statusClass: string;
+  ownerName: string;
 }
