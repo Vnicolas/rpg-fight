@@ -1,5 +1,5 @@
 <div *ngIf="user.characters.length > 0" class="table-container">
-  <table class="table is-hoverable is-fullwidth">
+  <table class="table is-fullwidth">
     <thead>
       <tr>
         <th></th>
@@ -17,25 +17,35 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let character of user.characters" class="has-text-centered">
+      <tr
+        *ngFor="let character of user.characters"
+        class="has-text-centered"
+        [class.is-selected]="fighterSelected?._id === character._id"
+      >
         <td>
           <button
-          class="button is-rounded"
-          [disabled]="character.status !== 'Ready'"
-          [class.is-success]="fighterSelected?._id === character._id"
-          (click)="select(character)">
-            <fa-icon
-              *ngIf="fighterSelected && fighterSelected._id === character._id"
-              [icon]="['fas', 'check-circle']">
-            </fa-icon>
-            <fa-icon
-              *ngIf="!fighterSelected || (fighterSelected && fighterSelected._id !== character._id)"
-              [icon]="['fas', 'dot-circle']">
-            </fa-icon>
+            class="button is-rounded"
+            [disabled]="character.status !== 'Ready'"
+            (click)="select(character)"
+          >
+            <span
+              [class.has-text-primary]="fighterSelected?._id === character._id"
+              *ngIf="fighterSelected?._id === character._id"
+            >
+              <fa-icon [icon]="['fas', 'check-circle']"> </fa-icon>
+            </span>
+            <span
+              *ngIf="!fighterSelected || fighterSelected?._id !== character._id"
+            >
+              <fa-icon [icon]="['fas', 'dot-circle']"> </fa-icon>
+            </span>
           </button>
         </td>
         <td>
-          <div class="character-picture" [innerHTML]="character.picture | safeHtml"></div>
+          <div
+            class="character-picture"
+            [innerHTML]="character.picture | safeHtml"
+          ></div>
         </td>
         <td class="has-text-weight-bold">{{ character.name }}</td>
         <td class="is-family-monospace">{{ character.rank }}</td>
@@ -48,15 +58,23 @@
           <button
             [disabled]="character.skillPoints === 0"
             [routerLink]="['/dashboard/character-update', character._id]"
-            class="button is-rounded">{{ character.skillPoints }}</button>
+            class="button is-rounded"
+          >
+            {{ character.skillPoints }}
+          </button>
         </td>
         <td>
-          <span class="tag {{ character.statusClass }}">{{ character.status }}</span>
+          <span class="tag {{ character.statusClass }}">{{
+            character.status
+          }}</span>
         </td>
         <td>
           <div class="field has-addons">
             <p class="control">
-              <button class="button is-info is-small" (click)="viewCharacter(character._id)">
+              <button
+                class="button is-info is-small"
+                (click)="viewCharacter(character._id)"
+              >
                 <span class="icon">
                   <fa-icon [icon]="['fas', 'id-card']"></fa-icon>
                 </span>
@@ -64,7 +82,10 @@
               </button>
             </p>
             <p class="control">
-              <button class="button is-danger is-small" (click)="deleteCharacter(character._id)">
+              <button
+                class="button is-danger is-small"
+                (click)="deleteCharacter(character._id)"
+              >
                 <span class="icon">
                   <fa-icon [icon]="['fas', 'times']"></fa-icon>
                 </span>
@@ -82,5 +103,6 @@
   *ngIf="characterSelected"
   [isActive]="isCharacterModalActive"
   [character]="characterSelected"
-  (closeEvent)="isCharacterModalActive = false">
+  (closeEvent)="isCharacterModalActive = false"
+>
 </app-character-infos>
