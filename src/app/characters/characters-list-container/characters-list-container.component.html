@@ -5,13 +5,22 @@
       <app-character-create
         [userId]="user._id"
         [charactersLength]="user.characters.length"
-        (characterCreated)="updateUser($event)">
+        (characterCreated)="updateUser($event)"
+      >
       </app-character-create>
     </div>
     <div class="block">
-      <app-characters-list
-        [user]="user">
-      </app-characters-list>
+      <app-characters-list [user]="user"></app-characters-list>
+    </div>
+    <div class="block has-text-centered">
+      <div class="control">
+        <!-- href force reload component -->
+        <a href="/lobby">
+          <button class="button is-medium is-rounded is-warning">
+            Launch new fight !
+          </button>
+        </a>
+      </div>
     </div>
   </section>
 </div>
