@@ -1,7 +1,11 @@
 <div *ngIf="character && skills" class="columns is-centered">
   <section class="section">
-    <div class="character-picture is-centered" [innerHtml]="character.picture | safeHtml"></div>
-    <h1 class="title is-1 has-text-centered">{{ character.name }} - Rank
+    <div
+      class="character-picture is-centered"
+      [innerHtml]="character.picture | safeHtml"
+    ></div>
+    <h1 class="title is-1 has-text-centered">
+      {{ character.name }} - Rank
       <span class="is-family-monospace">{{ character.rank }}</span>
     </h1>
 
@@ -15,41 +19,49 @@
       [initialPoints]="character.health"
       [finalPoints]="skills.health.finalPoints"
       (addPoints)="addPoints('health')"
-      (removePoints)="removePoints('health')">
+      (removePoints)="removePoints('health')"
+    >
     </app-skill-updater>
     <app-skill-updater
       skill="attack"
       [initialPoints]="character.attack"
       [finalPoints]="skills.attack.finalPoints"
       (addPoints)="addPoints('attack')"
-      (removePoints)="removePoints('attack')">
+      (removePoints)="removePoints('attack')"
+    >
     </app-skill-updater>
     <app-skill-updater
       skill="defense"
       [initialPoints]="character.defense"
       [finalPoints]="skills.defense.finalPoints"
       (addPoints)="addPoints('defense')"
-      (removePoints)="removePoints('defense')">
+      (removePoints)="removePoints('defense')"
+    >
     </app-skill-updater>
     <app-skill-updater
       skill="magik"
       [initialPoints]="character.magik"
       [finalPoints]="skills.magik.finalPoints"
       (addPoints)="addPoints('magik')"
-      (removePoints)="removePoints('magik')">
+      (removePoints)="removePoints('magik')"
+    >
     </app-skill-updater>
-    <hr>
+    <hr />
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-rounded is-success" (click)="update()">Submit</button>
+        <button class="button is-rounded is-success" (click)="update()">
+          Submit
+        </button>
       </div>
       <div class="control">
         <button
-          class="button is-rounded is-warning"
-          [routerLink]="['/dashboard']">Cancel
+          class="button is-rounded is-danger"
+          [routerLink]="['/dashboard']"
+        >
+          Cancel
         </button>
       </div>
-      <p *ngIf="errorMessage" class="help is-danger">{{ errorMessage }}</p>
+      <p *ngIf="errorMessage" class="help is-warning">{{ errorMessage }}</p>
     </div>
   </section>
 </div>
