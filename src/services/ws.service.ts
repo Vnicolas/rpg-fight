@@ -25,4 +25,8 @@ export class WSService {
   opponentFound(): Observable<OpponentData> {
     return this.socket.fromEvent("opponent-found");
   }
+
+  turnResults(): Observable<any> {
+    return this.socket.fromEvent("dice-result");
+  }
 }

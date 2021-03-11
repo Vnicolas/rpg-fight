@@ -30,23 +30,33 @@ export class LobbyComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.add(
+      this.wsService.connected().subscribe(() => {
+        this.opponentFighter = (undefined as unknown) as Character;
+        this.opponentOwnerName = "";
+        this.initDemands();
+        this.isLoading = true;
+      })
+    );
+  }
+
+  private initDemands(): void {
+    this.subscriptions.add(
       this.wsService.searchingOpponent().subscribe(() => {
         this.isLoading = true;
       })
     );
 
     this.subscriptions.add(
-      this.wsService.connected().subscribe(() => {
-        this.isLoading = true;
+      this.wsService.opponentFound().subscribe((opponentData: OpponentData) => {
+        this.isLoading = false;
+        this.opponentFighter = opponentData.fighterByRank;
+        this.opponentOwnerName = opponentData.ownerName;
       })
     );
 
     this.subscriptions.add(
-      this.wsService.opponentFound().subscribe((opponentData: OpponentData) => {
-        console.log(opponentData);
-        this.isLoading = false;
-        this.opponentFighter = opponentData.fighterByRank;
-        this.opponentOwnerName = opponentData.ownerName;
+      this.wsService.turnResults().subscribe((results: any) => {
+        console.log("results", results);
       })
     );
 
