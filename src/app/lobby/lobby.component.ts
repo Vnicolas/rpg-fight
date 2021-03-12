@@ -1,7 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { Character } from "app/interfaces/character";
-import { OpponentData } from "app/interfaces/fight";
+import { FinalResult, OpponentData } from "app/interfaces/fight";
 import { User } from "app/interfaces/user";
 import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
@@ -24,6 +24,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
   public opponentFighter!: Character;
   public opponentOwnerName!: string;
   public user!: User;
+  public finalResults!: FinalResult;
+  public fighterWinner = false;
+  public opponentWinner = false;
 
   constructor(
     private wsService: WSService,
@@ -39,8 +42,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.wsService.connected().subscribe(() => {
-        this.opponentFighter = (undefined as unknown) as Character;
-        this.opponentOwnerName = "";
         this.initDemands();
         this.isLoading = true;
       })
@@ -65,6 +66,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.opponentFighter = opponentData.fighterByRank;
         this.opponentOwnerName = opponentData.ownerName;
+        console.log("this.opponentFighter", this.opponentFighter);
       })
     );
 
@@ -75,7 +77,21 @@ export class LobbyComponent implements OnInit, OnDestroy {
       })
     );
 
+    this.subscriptions.add(
+      this.wsService.end().subscribe((fight: FinalResult) => {
+        this.finalResults = fight;
+        const winnerId = this.finalResults.winner;
+        this.fighterWinner = winnerId === this.fighter._id;
+        this.opponentWinner = winnerId === this.opponentFighter._id;
+        console.log("fight", fight);
+      })
+    );
+
     this.wsService.searchOpponent(this.user._id, this.fighter);
+  }
+
+  private gotToFightPage(fightId: string): void {
+    this.router.navigateByUrl(`/fight/${fightId}`);
   }
 
   @HostListener("window:beforeunload")

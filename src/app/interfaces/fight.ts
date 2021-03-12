@@ -1,4 +1,5 @@
 import { Character } from "./character";
+import { Turn } from "./turn.interface";
 
 export interface OpponentData {
   fighterByRank: Character;
@@ -14,4 +15,12 @@ export interface Fight {
   looserAttackValue: number;
   winnerHealthPointsSub: number;
   looserHealthPointsSub: number;
+}
+
+export interface FinalResult {
+  winnerOwner: string;
+  looserOwner: string;
+  winner: string;
+  looser: string;
+  turns: Turn[];
 }

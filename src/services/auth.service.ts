@@ -37,6 +37,7 @@ export class AuthService {
 
   logout(): void {
     this.storageService.removeItem("account");
+    this.storageService.removeItem("fighter");
     this.router.navigateByUrl("/home");
   }
 }

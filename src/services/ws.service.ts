@@ -33,4 +33,8 @@ export class WSService {
   turnResults(): Observable<any> {
     return this.socket.fromEvent("turn-results");
   }
+
+  end(): Observable<any> {
+    return this.socket.fromEvent("end");
+  }
 }

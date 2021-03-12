@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [ngClass]="{ shaked: shake, winner: isWinner }">
   <header class="card-header">
     <p class="card-header-title has-text-centered is-size-5">
       @{{ ownerName }} / {{ fighter.name }}
@@ -56,6 +56,15 @@
       <span class="is-family-monospace dice-result is-size-4">{{
         turnDiceResult.result
       }}</span>
+    </div>
+    <div
+      *ngIf="isWinner"
+      class="card-footer-item has-text-warning has-background-success"
+    >
+      <span class="winner-icon">
+        <fa-icon [icon]="['fas', 'crown']"></fa-icon>
+      </span>
+      <span class="dice-result is-size-4">WINNER</span>
     </div>
   </footer>
 </div>

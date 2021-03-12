@@ -1,9 +1,3 @@
-<!-- TODO: Display (~2.5s) when fight ends, before fight results (via routing) -->
-<!-- {{ isLoading }}
-<div class="pageloader" [class.is-active]="isLoading">
-  <span class="title">Searching opponent ...</span>
-</div> -->
-
 <div class="columns">
   <div class="column is-full has-text-centered">
     <div class="turn is-size-1">
@@ -23,6 +17,7 @@
         [ownerName]="user.name"
         [turnAttackResult]="currentTurn.attackResults[1]"
         [turnDiceResult]="currentTurn.dicesResults[0]"
+        [isWinner]="fighterWinner"
         [fighter]="fighter"
       >
       </app-fighter-card>
@@ -38,6 +33,7 @@
         [ownerName]="opponentOwnerName"
         [turnAttackResult]="currentTurn.attackResults[0]"
         [turnDiceResult]="currentTurn.dicesResults[1]"
+        [isWinner]="opponentWinner"
         [fighter]="opponentFighter"
       >
       </app-fighter-card>
