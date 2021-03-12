@@ -1,5 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
+import { ActivatedRoute, Data, Router } from "@angular/router";
 import { Character } from "app/interfaces/character";
 import { OpponentData } from "app/interfaces/fight";
 import { User } from "app/interfaces/user";
@@ -15,13 +15,21 @@ import { WSService } from "../../services/ws.service";
 export class LobbyComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   public isLoading = false;
-  public currentTurn = 1;
+  public currentTurn: any = {
+    number: 0,
+    attackResults: [],
+    dicesResults: [],
+  };
   public fighter!: Character;
   public opponentFighter!: Character;
   public opponentOwnerName!: string;
   public user!: User;
 
-  constructor(private wsService: WSService, private route: ActivatedRoute) {}
+  constructor(
+    private wsService: WSService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.data.pipe(first()).subscribe((data: Data) => {
@@ -41,6 +49,12 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   private initDemands(): void {
     this.subscriptions.add(
+      this.wsService.disconnected().subscribe(() => {
+        this.router.navigateByUrl("/dashboard/characters");
+      })
+    );
+
+    this.subscriptions.add(
       this.wsService.searchingOpponent().subscribe(() => {
         this.isLoading = true;
       })
@@ -56,6 +70,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.wsService.turnResults().subscribe((results: any) => {
+        this.currentTurn = results;
         console.log("results", results);
       })
     );

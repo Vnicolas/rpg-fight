@@ -7,9 +7,9 @@
 <div class="columns">
   <div class="column is-full has-text-centered">
     <div class="turn is-size-1">
-      <ng-container *ngIf="!isLoading">
+      <ng-container *ngIf="!isLoading && currentTurn.number > 0">
         Turn
-        <span class="is-family-monospace"> {{ currentTurn }}</span>
+        <span class="is-family-monospace"> {{ currentTurn.number }}</span>
       </ng-container>
     </div>
   </div>
@@ -21,6 +21,8 @@
       <app-fighter-card
         *ngIf="user && fighter"
         [ownerName]="user.name"
+        [turnAttackResult]="currentTurn.attackResults[1]"
+        [turnDiceResult]="currentTurn.dicesResults[0]"
         [fighter]="fighter"
       >
       </app-fighter-card>
@@ -34,6 +36,8 @@
       <app-fighter-card
         *ngIf="opponentFighter"
         [ownerName]="opponentOwnerName"
+        [turnAttackResult]="currentTurn.attackResults[0]"
+        [turnDiceResult]="currentTurn.dicesResults[1]"
         [fighter]="opponentFighter"
       >
       </app-fighter-card>

@@ -23,7 +23,12 @@ import { WSService } from "services/ws.service";
 import { environment } from "environments/environment";
 import { FighterCardComponent } from "./lobby/fighter-card/fighter-card.component";
 
-const config: SocketIoConfig = { url: environment.backendUrl };
+const config: SocketIoConfig = {
+  url: environment.backendUrl,
+  options: {
+    reconnection: false,
+  },
+};
 
 @NgModule({
   declarations: [

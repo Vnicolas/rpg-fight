@@ -9,4 +9,9 @@ ul.no-bullets {
   width: 150px;
   margin-left: auto;
   margin-right: auto;
+  filter: drop-shadow(5px 5px 10px #333);
+}
+
+.dice-result {
+  padding: 0px 1px 1px 8px;
 }

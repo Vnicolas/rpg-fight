@@ -22,11 +22,15 @@ export class WSService {
     return this.socket.fromEvent("connected");
   }
 
+  disconnected(): Observable<void> {
+    return this.socket.fromEvent("disconnect");
+  }
+
   opponentFound(): Observable<OpponentData> {
     return this.socket.fromEvent("opponent-found");
   }
 
   turnResults(): Observable<any> {
-    return this.socket.fromEvent("dice-result");
+    return this.socket.fromEvent("turn-results");
   }
 }

@@ -16,8 +16,16 @@
       ></div>
       <div class="is-size-2">
         HP :
-        <span class="is-family-monospace has-text-danger has-text-weight-bold">
-          {{ fighter.health }}
+        <span class="is-family-monospace has-text-info has-text-weight-bold">
+          <ng-container *ngIf="turnAttackResult">
+            {{ turnAttackResult.opponentHpResult }}
+            <span class="has-text-danger"
+              >(-{{ turnAttackResult.result }})</span
+            >
+          </ng-container>
+          <ng-container *ngIf="!turnAttackResult">
+            {{ fighter.health }}
+          </ng-container>
         </span>
       </div>
       <ul class="no-bullets">
@@ -43,6 +51,11 @@
     </div>
   </div>
   <footer class="card-footer">
-    <div class="card-footer-item">Dice result : 4</div>
+    <div *ngIf="turnDiceResult" class="card-footer-item">
+      Dice result :
+      <span class="is-family-monospace dice-result is-size-4">{{
+        turnDiceResult.result
+      }}</span>
+    </div>
   </footer>
 </div>

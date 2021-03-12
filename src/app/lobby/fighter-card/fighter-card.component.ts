@@ -13,6 +13,12 @@ export class FighterCardComponent implements OnInit {
   @Input()
   ownerName!: string;
 
+  @Input()
+  turnAttackResult?: any;
+
+  @Input()
+  turnDiceResult?: any;
+
   constructor() {}
 
   ngOnInit(): void {}
