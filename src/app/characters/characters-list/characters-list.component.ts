@@ -9,9 +9,9 @@ import {
   faCrown,
 } from "@fortawesome/free-solid-svg-icons";
 import { User } from "../../interfaces/user";
-import { UserService } from "services/user.service";
 import { Subscription } from "rxjs";
-import { CharactersService } from "services/characters.service";
+import { UserService } from "app/services/user.service";
+import { CharactersService } from "app/services/characters.service";
 
 @Component({
   selector: "app-characters-list",

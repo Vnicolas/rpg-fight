@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
 import { Fighter } from "app/interfaces/fight.interface";
-import { StorageService } from "services/storage.service";
+import { StorageService } from "app/services/storage.service";
 
 @Injectable({ providedIn: "root" })
 export class FighterResolver implements Resolve<Fighter> {

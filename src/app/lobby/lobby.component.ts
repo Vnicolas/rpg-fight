@@ -6,7 +6,7 @@ import { Turn } from "app/interfaces/turn.interface";
 import { User } from "app/interfaces/user";
 import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
-import { WSService } from "../../services/ws.service";
+import { WSService } from "../services/ws.service";
 
 @Component({
   selector: "app-lobby",

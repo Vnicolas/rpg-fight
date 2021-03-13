@@ -7,23 +7,23 @@ import { HomeComponent } from "./home/home.component";
 
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule } from "@angular/forms";
-import { UserService } from "services/user.service";
 import { HttpClientModule } from "@angular/common/http";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuardService } from "app/guards/auth.guard";
-import { AuthService } from "services/auth.service";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { CharactersModule } from "./characters/characters.module";
-import { SkillsService } from "services/skills.service";
-import { CharactersService } from "services/characters.service";
 import { PipesModule } from "./shared/pipes/pipes.module";
 import { LobbyComponent } from "./lobby/lobby.component";
 import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
-import { WSService } from "services/ws.service";
 import { environment } from "environments/environment";
 import { FighterCardComponent } from "./lobby/fighter-card/fighter-card.component";
 import { FightsComponent } from "./fights/fights.component";
-
+import { AuthService } from "./services/auth.service";
+import { UserService } from "./services/user.service";
+import { CharactersService } from "./services/characters.service";
+import { SkillsService } from "./services/skills.service";
+import { WSService } from "./services/ws.service";
+import { IconsModule } from "./icons.module";
 const config: SocketIoConfig = {
   url: environment.backendUrl,
   options: {
@@ -42,6 +42,7 @@ const config: SocketIoConfig = {
     FightsComponent,
   ],
   imports: [
+    IconsModule,
     PipesModule,
     CharactersModule,
     FormsModule,

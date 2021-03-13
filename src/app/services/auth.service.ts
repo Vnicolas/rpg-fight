@@ -5,7 +5,7 @@ import { catchError, first } from "rxjs/operators";
 import { User } from "app/interfaces/user";
 import { handleHttpErrors } from "app/shared/utils";
 import { StorageService } from "./storage.service";
-import { environment } from "../environments/environment";
+import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
 
 @Injectable({

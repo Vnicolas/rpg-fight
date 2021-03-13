@@ -4,7 +4,7 @@ import { catchError, first } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Character } from "app/interfaces/character.interface";
 import { handleHttpErrors, Point } from "app/shared/utils";
-import { environment } from "../environments/environment";
+import { environment } from "../../environments/environment";
 import { StorageService } from "./storage.service";
 import { Fight } from "app/interfaces/fight.interface";
 

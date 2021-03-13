@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { Fight } from "app/interfaces/fight.interface";
 import { first } from "rxjs/operators";
-import { CharactersService } from "services/characters.service";
+import { CharactersService } from "../services/characters.service";
 
 @Injectable({ providedIn: "root" })
 export class FightsResolver implements Resolve<Fight[]> {
