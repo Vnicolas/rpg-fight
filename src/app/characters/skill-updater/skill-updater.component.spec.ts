@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { IconsModule } from "app/icons.module";
 
 import { SkillUpdaterComponent } from "./skill-updater.component";
 
@@ -8,6 +9,7 @@ describe("SkillUpdaterComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [IconsModule],
       declarations: [SkillUpdaterComponent],
     }).compileComponents();
   });
@@ -20,5 +22,21 @@ describe("SkillUpdaterComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  describe("addPoint()", () => {
+    it("should emit event", () => {
+      const spy = spyOn(component.addPoints, "emit");
+      component.addPoint();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("removePoint()", () => {
+    it("should emit event", () => {
+      const spy = spyOn(component.removePoints, "emit");
+      component.removePoint();
+      expect(spy).toHaveBeenCalled();
+    });
   });
 });

@@ -4,13 +4,13 @@ module.exports = {
   setupFilesAfterEnv: ["./src/setup-jest.ts"],
   verbose: false,
   collectCoverage: true,
-  collectCoverageFrom: ["src/app/**/*.ts"],
   coveragePathIgnorePatterns: [
     "node_modules",
     "interfaces",
     ".module.ts",
     "<rootDir>/src/app/main.ts",
     ".mock.ts",
+    ".html",
   ],
   reporters: ["default"],
   globals: {
