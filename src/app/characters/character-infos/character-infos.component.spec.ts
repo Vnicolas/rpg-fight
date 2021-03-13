@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { PipesModule } from "app/shared/pipes/pipes.module";
 
 import { CharacterInfosComponent } from "./character-infos.component";
 
@@ -8,6 +9,7 @@ describe("CharacterInfosComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [PipesModule],
       declarations: [CharacterInfosComponent],
     }).compileComponents();
   });
@@ -20,5 +22,13 @@ describe("CharacterInfosComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  describe("close()", () => {
+    it("should emit closeEvent", () => {
+      const spy = spyOn(component.closeEvent, "emit");
+      component.close();
+      expect(spy).toHaveBeenCalled();
+    });
   });
 });
