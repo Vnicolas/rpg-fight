@@ -1,0 +1,36 @@
+<div class="container">
+  <button
+    class="button is-rounded mt-4"
+    [routerLink]="['/dashboard/character']"
+  >
+    <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+    &nbsp;Back
+  </button>
+  <div class="character-infos has-text-centered">
+    <div
+      class="character-picture"
+      [innerHTML]="character.picture | safeHtml"
+    ></div>
+    <div class="character-name is-size-3">{{ character.name }}</div>
+  </div>
+  <div *ngIf="fights && fights.length > 0" class="table-container">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th class="has-text-centered">Opponent</th>
+          <th class="has-text-centered">Result</th>
+          <th class="has-text-centered">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fight of fights" class="has-text-centered">
+          <td>{{ fight.fightOpponentLabel }}</td>
+          <td>
+            <span class="tag {{ fight.tagClass }}">{{ fight.winOrLoose }}</span>
+          </td>
+          <td>{{ fight.createdAt }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -19,9 +19,9 @@
         <span class="is-family-monospace has-text-info has-text-weight-bold">
           <ng-container *ngIf="turnAttackResult">
             {{ turnAttackResult.opponentHpResult }}
-            <span class="has-text-danger"
-              >(-{{ turnAttackResult.result }})</span
-            >
+            <span class="has-text-danger">
+              (-{{ turnAttackResult.result }})
+            </span>
           </ng-container>
           <ng-container *ngIf="!turnAttackResult">
             {{ fighter.health }}

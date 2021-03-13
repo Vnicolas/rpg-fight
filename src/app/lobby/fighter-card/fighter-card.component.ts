@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from "@angular/core";
-import { Character } from "app/interfaces/character";
+import { Character } from "app/interfaces/character.interface";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { Character } from "../../interfaces/character";
+import { Character } from "../../interfaces/character.interface";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import {
   faTimes,
   faIdCard,
   faCheckCircle,
   faDotCircle,
+  faCrown,
 } from "@fortawesome/free-solid-svg-icons";
 import { User } from "../../interfaces/user";
 import { UserService } from "services/user.service";
@@ -33,7 +34,7 @@ export class CharactersListComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private characterService: CharactersService
   ) {
-    library.addIcons(faTimes, faIdCard, faCheckCircle, faDotCircle);
+    library.addIcons(faTimes, faIdCard, faCheckCircle, faDotCircle, faCrown);
   }
 
   ngOnInit(): void {

@@ -5,6 +5,11 @@ export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
   return throwError(error.error.message);
 }
 
+export const enum WON_OR_LOOSE {
+  WON = "Won",
+  LOOSE = "Loose",
+}
+
 export const enum CharacterStatus {
   NOT_READY = "Not Ready",
   READY = "Ready",
@@ -64,3 +69,29 @@ export function getStatusClass(characterStatus: string): string {
   }
   return classToReturn;
 }
+
+export function getFightStatusClass(fightStatus: string): string {
+  let classToReturn = "";
+  switch (fightStatus) {
+    case undefined:
+      classToReturn = "";
+      break;
+    case WON_OR_LOOSE.WON:
+      classToReturn = "is-success";
+      break;
+    case WON_OR_LOOSE.LOOSE:
+      classToReturn = "is-danger";
+      break;
+    default:
+      break;
+  }
+  return classToReturn;
+}
+
+export const dateOptions: any = {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+};

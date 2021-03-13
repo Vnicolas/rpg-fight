@@ -9,6 +9,8 @@ import { CharacterResolver } from "./resolvers/character.resolver";
 import { LobbyComponent } from "./lobby/lobby.component";
 import { LobbyGuard } from "./guards/lobby.guard";
 import { FighterResolver } from "./resolvers/fighter.resolver";
+import { FightsComponent } from "./fights/fights.component";
+import { FightsResolver } from "./resolvers/fights.resolver";
 
 const routes: Routes = [
   {
@@ -25,6 +27,15 @@ const routes: Routes = [
       {
         path: "characters",
         component: CharactersListContainerComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "character/:id/fights",
+        component: FightsComponent,
+        resolve: {
+          fights: FightsResolver,
+          character: CharacterResolver,
+        },
         canActivate: [AuthGuard],
       },
       {

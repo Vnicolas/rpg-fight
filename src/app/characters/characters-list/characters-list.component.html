@@ -10,7 +10,6 @@
         <th>Attack</th>
         <th>Defense</th>
         <th>Magik</th>
-        <th>Fights</th>
         <th>Skill Points</th>
         <th>Status</th>
         <th></th>
@@ -53,7 +52,6 @@
         <td class="is-family-monospace">{{ character.attack }}</td>
         <td class="is-family-monospace">{{ character.defense }}</td>
         <td class="is-family-monospace">{{ character.magik }}</td>
-        <td class="is-family-monospace">{{ character.fights.length }}</td>
         <td class="is-family-monospace">
           <button
             [disabled]="character.skillPoints === 0"
@@ -70,6 +68,17 @@
         </td>
         <td>
           <div class="field has-addons">
+            <p class="control">
+              <button
+                class="button is-info is-small"
+                [routerLink]="['/dashboard/character', character._id, 'fights']"
+              >
+                <span class="icon">
+                  <fa-icon [icon]="['fas', 'crown']"></fa-icon>
+                </span>
+                <span>Fights</span>
+              </button>
+            </p>
             <p class="control">
               <button
                 class="button is-info is-small"

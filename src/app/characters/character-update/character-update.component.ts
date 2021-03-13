@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Character } from "../../interfaces/character";
+import { Character } from "../../interfaces/character.interface";
 import { first } from "rxjs/operators";
 import { SkillsService } from "services/skills.service";
 import { CharacterFightProperty, Points, Skills } from "app/shared/utils";

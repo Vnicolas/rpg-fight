@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { first } from "rxjs/operators";
 import { UserService } from "services/user.service";
-import { Character } from "../interfaces/character";
+import { Character } from "../interfaces/character.interface";
 
 @Injectable({ providedIn: "root" })
 export class CharacterResolver implements Resolve<Character> {

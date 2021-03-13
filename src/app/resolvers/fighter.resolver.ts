@@ -1,18 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
-import { User } from "app/interfaces/user";
+import { Fighter } from "app/interfaces/fight.interface";
 import { StorageService } from "services/storage.service";
-import { Character } from "../interfaces/character";
-
-export interface FighterInterface {
-  user: User;
-  fighter: Character;
-}
 
 @Injectable({ providedIn: "root" })
-export class FighterResolver implements Resolve<FighterInterface> {
+export class FighterResolver implements Resolve<Fighter> {
   constructor(private storageService: StorageService) {}
-  async resolve(): Promise<FighterInterface> {
+  async resolve(): Promise<Fighter> {
     const fighter = this.storageService.getItem("fighter", true);
     const user = this.storageService.getItem("account", true);
     if (!fighter || !user) {

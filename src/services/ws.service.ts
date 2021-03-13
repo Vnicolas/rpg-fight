@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Character } from "app/interfaces/character";
-import { OpponentData } from "app/interfaces/fight";
+import { Character } from "app/interfaces/character.interface";
 import { Socket } from "ngx-socket-io";
 import { Observable } from "rxjs";
 
@@ -26,7 +25,7 @@ export class WSService {
     return this.socket.fromEvent("disconnect");
   }
 
-  opponentFound(): Observable<OpponentData> {
+  opponentFound(): Observable<Character> {
     return this.socket.fromEvent("opponent-found");
   }
 

@@ -1,7 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Character } from "app/interfaces/character";
-import { FinalResult, OpponentData } from "app/interfaces/fight";
+import { Character } from "app/interfaces/character.interface";
+import { Fight } from "app/interfaces/fight.interface";
+import { Turn } from "app/interfaces/turn.interface";
 import { User } from "app/interfaces/user";
 import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
@@ -15,18 +16,20 @@ import { WSService } from "../../services/ws.service";
 export class LobbyComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   public isLoading = false;
-  public currentTurn: any = {
+  public currentTurn: Turn = {
     number: 0,
     attackResults: [],
     dicesResults: [],
+    isLast: false,
   };
   public fighter!: Character;
   public opponentFighter!: Character;
   public opponentOwnerName!: string;
   public user!: User;
-  public finalResults!: FinalResult;
+  public finalResults!: Fight;
   public fighterWinner = false;
   public opponentWinner = false;
+  public timeLeftBeforeNavigation = 4; // in seconds
 
   constructor(
     private wsService: WSService,
@@ -36,8 +39,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.data.pipe(first()).subscribe((data: Data) => {
-      this.fighter = data.fighterInfos.fighter;
       this.user = data.fighterInfos.user;
+      this.fighter = data.fighterInfos.fighter;
+      this.fighter.ownerName = this.user.name;
     });
 
     this.subscriptions.add(
@@ -62,36 +66,42 @@ export class LobbyComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
-      this.wsService.opponentFound().subscribe((opponentData: OpponentData) => {
+      this.wsService.opponentFound().subscribe((opponent: Character) => {
         this.isLoading = false;
-        this.opponentFighter = opponentData.fighterByRank;
-        this.opponentOwnerName = opponentData.ownerName;
-        console.log("this.opponentFighter", this.opponentFighter);
+        this.currentTurn.number = 1;
+        this.opponentFighter = opponent;
+        this.opponentOwnerName = opponent.ownerName;
       })
     );
 
     this.subscriptions.add(
       this.wsService.turnResults().subscribe((results: any) => {
         this.currentTurn = results;
-        console.log("results", results);
       })
     );
 
     this.subscriptions.add(
-      this.wsService.end().subscribe((fight: FinalResult) => {
+      this.wsService.end().subscribe((fight: Fight) => {
         this.finalResults = fight;
-        const winnerId = this.finalResults.winner;
+        const winnerId = this.finalResults.winnerId;
         this.fighterWinner = winnerId === this.fighter._id;
         this.opponentWinner = winnerId === this.opponentFighter._id;
-        console.log("fight", fight);
+        this.gotToFightPage();
       })
     );
 
     this.wsService.searchOpponent(this.user._id, this.fighter);
   }
 
-  private gotToFightPage(fightId: string): void {
-    this.router.navigateByUrl(`/fight/${fightId}`);
+  private gotToFightPage(): void {
+    const downloadTimer = setInterval(() => {
+      if (this.timeLeftBeforeNavigation <= 0) {
+        clearInterval(downloadTimer);
+        this.router.navigateByUrl("/dashboard/characters");
+        return;
+      }
+      this.timeLeftBeforeNavigation--;
+    }, 1000);
   }
 
   @HostListener("window:beforeunload")

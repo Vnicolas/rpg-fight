@@ -1,4 +1,4 @@
-import { Fight } from "./fight";
+import { Fight } from "./fight.interface";
 
 export interface Character {
   _id: string;

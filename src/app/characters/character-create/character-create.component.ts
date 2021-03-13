@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { UserService } from "services/user.service";
-import { Character } from "../../interfaces/character";
+import { Character } from "../../interfaces/character.interface";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Subscription } from "rxjs";

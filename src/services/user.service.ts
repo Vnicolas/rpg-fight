@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { catchError, first } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
-import { Character } from "app/interfaces/character";
+import { Character } from "app/interfaces/character.interface";
 import { getStatusClass, handleHttpErrors } from "app/shared/utils";
 import { environment } from "../environments/environment";
 import { User } from "app/interfaces/user";
