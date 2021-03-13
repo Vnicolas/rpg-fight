@@ -4,7 +4,14 @@ module.exports = {
   setupFilesAfterEnv: ["./src/setup-jest.ts"],
   verbose: false,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.spec.ts'],
+  collectCoverageFrom: ["src/app/**/*.ts"],
+  coveragePathIgnorePatterns: [
+    "node_modules",
+    "interfaces",
+    ".module.ts",
+    "<rootDir>/src/app/main.ts",
+    ".mock.ts",
+  ],
   reporters: ["default"],
   globals: {
     "ts-jest": {
@@ -14,16 +21,16 @@ module.exports = {
         before: [
           "jest-preset-angular/build/InlineFilesTransformer",
           "jest-preset-angular/build/StripStylesTransformer",
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   transform: {
-    "^.+\\.(ts|js|html|svg)$": "ts-jest"
+    "^.+\\.(ts|js|html|svg)$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "js", "html", "svg"],
   moduleNameMapper: {
-    "/^app/(.*)$/": "./src/app/$1"
+    "/^app/(.*)$/": "./src/app/$1",
   },
-  resolver: null
+  resolver: null,
 };

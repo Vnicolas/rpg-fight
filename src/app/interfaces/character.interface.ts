@@ -15,3 +15,35 @@ export interface Character {
   statusClass: string;
   ownerName: string;
 }
+
+export interface Points {
+  initialPoints: number;
+  finalPoints: number;
+  costs: number[];
+}
+
+export interface Skills {
+  [key: string]: Points;
+}
+
+export interface Point {
+  [key: string]: number;
+}
+
+export interface PointsCost {
+  [key: string]: number[];
+}
+
+export const enum CharacterStatus {
+  NOT_READY = "Not Ready",
+  READY = "Ready",
+  IN_FIGHT = "In Fight",
+  RESTING = "Resting",
+}
+
+export const enum CharacterFightProperty {
+  HEALTH = "health",
+  ATTAK = "attack",
+  DEFENSE = "defense",
+  MAGIK = "magik",
+}

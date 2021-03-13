@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
+import { CharacterStatus } from "app/interfaces/character.interface";
 import { Observable, throwError } from "rxjs";
 
 export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
@@ -8,38 +9,6 @@ export function handleHttpErrors(error: HttpErrorResponse): Observable<never> {
 export const enum WON_OR_LOOSE {
   WON = "Won",
   LOOSE = "Loose",
-}
-
-export const enum CharacterStatus {
-  NOT_READY = "Not Ready",
-  READY = "Ready",
-  IN_FIGHT = "In Fight",
-  RESTING = "Resting",
-}
-
-export const enum CharacterFightProperty {
-  HEALTH = "health",
-  ATTAK = "attack",
-  DEFENSE = "defense",
-  MAGIK = "magik",
-}
-
-export interface Points {
-  initialPoints: number;
-  finalPoints: number;
-  costs: number[];
-}
-
-export interface Skills {
-  [key: string]: Points;
-}
-
-export interface Point {
-  [key: string]: number;
-}
-
-export interface PointsCost {
-  [key: string]: number[];
 }
 
 export function getDivided(amount: number): number {

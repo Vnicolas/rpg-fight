@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Character } from "../../interfaces/character.interface";
+import {
+  Character,
+  CharacterFightProperty,
+  Points,
+  Skills,
+} from "../../interfaces/character.interface";
 import { first } from "rxjs/operators";
-import { CharacterFightProperty, Points, Skills } from "app/shared/utils";
 import { Subscription } from "rxjs";
 import { User } from "app/interfaces/user";
 import { SkillsService } from "app/services/skills.service";
@@ -37,6 +41,7 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
       this.character = data.character;
       if (this.character.skillPoints === 0) {
         this.goToDashboard();
+        return;
       }
       this.initSkills(this.character);
     });
@@ -103,10 +108,10 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
 
   private initSkills(character: Character): void {
     this.pointsAvailable = Number(character.skillPoints);
-    this.skills.health = this.initSkill(this.character.health);
-    this.skills.attack = this.initSkill(this.character.attack);
-    this.skills.defense = this.initSkill(this.character.defense);
-    this.skills.magik = this.initSkill(this.character.magik);
+    this.skills.health = this.initSkill(character.health);
+    this.skills.attack = this.initSkill(character.attack);
+    this.skills.defense = this.initSkill(character.defense);
+    this.skills.magik = this.initSkill(character.magik);
   }
 
   private addHealthPoint(): void {
