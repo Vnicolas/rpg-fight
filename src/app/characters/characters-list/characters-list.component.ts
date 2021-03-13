@@ -32,13 +32,13 @@ export class CharactersListComponent implements OnInit, OnDestroy {
   constructor(
     library: FaIconLibrary,
     private userService: UserService,
-    private characterService: CharactersService
+    private charactersService: CharactersService
   ) {
     library.addIcons(faTimes, faIdCard, faCheckCircle, faDotCircle, faCrown);
   }
 
   ngOnInit(): void {
-    this.fighterSelected = this.characterService.getFighter();
+    this.fighterSelected = this.charactersService.getFighter();
   }
 
   public deleteCharacter(characterId: string): void {
@@ -73,11 +73,11 @@ export class CharactersListComponent implements OnInit, OnDestroy {
   public select(character: Character): void {
     if (this.fighterSelected?._id === character._id) {
       this.fighterSelected = (undefined as unknown) as Character;
-      this.characterService.unSelectFighter();
+      this.charactersService.unSelectFighter();
       return;
     }
     this.fighterSelected = character;
-    this.characterService.selectFighter(character);
+    this.charactersService.selectFighter(character);
   }
 
   ngOnDestroy(): void {
