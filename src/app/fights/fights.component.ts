@@ -33,19 +33,13 @@ export class FightsComponent implements OnInit {
     });
   }
 
-  getFightResult(fight: Fight, characterId: string): any {
-    let fightOpponentLabel = "";
-    if (fight.winnerId === characterId) {
-      fightOpponentLabel = `@${fight.looserOwnerName} / ${fight.looserName}`;
-    }
+  private getFightResult(fight: Fight, characterId: string): any {
+    let fightOpponentLabel = `@${fight.looserOwnerName} / ${fight.looserName}`;
     if (fight.looserId === characterId) {
       fightOpponentLabel = `@${fight.winnerOwnerName} / ${fight.winnerName}`;
     }
 
-    let winOrLoose = "";
-    if (fight.winnerId === characterId) {
-      winOrLoose = WON_OR_LOOSE.WON;
-    }
+    let winOrLoose = WON_OR_LOOSE.WON;
     if (fight.looserId === characterId) {
       winOrLoose = WON_OR_LOOSE.LOOSE;
     }
