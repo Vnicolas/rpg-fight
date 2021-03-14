@@ -23,19 +23,19 @@ export class AuthService {
     return !!token;
   }
 
-  signup(name: string, password: string): Observable<User> {
+  public signup(name: string, password: string): Observable<User> {
     return this.http
       .post<User>(`${environment.backendUrl}users`, { name, password })
       .pipe(first(), catchError(handleHttpErrors));
   }
 
-  signin(name: string, password: string): Observable<User> {
+  public signin(name: string, password: string): Observable<User> {
     return this.http
       .post<User>(`${environment.backendUrl}users/login`, { name, password })
       .pipe(first(), catchError(handleHttpErrors));
   }
 
-  logout(): void {
+  public logout(): void {
     this.storageService.removeItem("account");
     this.storageService.removeItem("fighter");
     this.router.navigateByUrl("/home");
