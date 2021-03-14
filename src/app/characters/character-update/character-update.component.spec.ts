@@ -77,7 +77,7 @@ describe("CharacterUpdateComponent", () => {
         {
           provide: CharactersService,
           useValue: {
-            updatePoints: {
+            updateCharacter: {
               pipe: jest.fn(),
               subscribe: (fn: (value: Data) => void) => jest.fn(),
             },
@@ -224,7 +224,7 @@ describe("CharacterUpdateComponent", () => {
       component.character = { _id: "characterId" } as Character;
       const spyCharactersService = spyOn(
         charactersService,
-        "updatePoints"
+        "updateCharacter"
       ).and.returnValue(of(character));
       const spyUserService = spyOn(userService, "updateUser");
       const spyRedirect = spyOn(
@@ -247,7 +247,7 @@ describe("CharacterUpdateComponent", () => {
       component.character = { _id: "characterId" } as Character;
       const spyCharactersService = spyOn(
         charactersService,
-        "updatePoints"
+        "updateCharacter"
       ).and.returnValue(throwError("An error"));
       component.update();
       expect(spyCharactersService).toHaveBeenCalled();

@@ -86,4 +86,12 @@ describe("WSService", () => {
       expect(spy).toHaveBeenCalledWith("end");
     });
   });
+
+  describe("errors()", () => {
+    it("should receive exception event", () => {
+      const spy = spyOn(socket, "fromEvent");
+      service.errors();
+      expect(spy).toHaveBeenCalledWith("exception");
+    });
+  });
 });

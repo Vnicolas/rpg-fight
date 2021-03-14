@@ -48,6 +48,7 @@ describe("LobbyComponent", () => {
             turnResults: () => of(false),
             end: () => of(false),
             searchOpponent: () => of(false),
+            errors: () => of(false),
           },
         },
         {
@@ -183,6 +184,19 @@ describe("LobbyComponent", () => {
     });
   });
 
+  describe("initErrorsEvent()", () => {
+    it("should subscribe errors wsService event", () => {
+      component.isLoading = false;
+      const spySubs = spyOn((component as any).subscriptions, "add");
+      const spyGoToFightPage = spyOn(component as any, "goToFightPage");
+      const spyWSService = spyOn(wSService, "errors").and.returnValue(of({}));
+      (component as any).initErrorsEvent();
+      expect(spySubs).toHaveBeenCalled();
+      expect(spyWSService).toHaveBeenCalled();
+      expect(spyGoToFightPage).toHaveBeenCalled();
+    });
+  });
+
   describe("initDemands()", () => {
     beforeEach(() => {
       component.user = userSaved;
@@ -202,6 +216,7 @@ describe("LobbyComponent", () => {
         component as any,
         "initTurnResultsEvent"
       );
+      const spyInitErrorsEvent = spyOn(component as any, "initErrorsEvent");
       const spyWSService = spyOn(wSService, "searchOpponent");
       const spyEndEvent = spyOn(component as any, "initEndEvent");
       (component as any).initDemands();
@@ -209,6 +224,7 @@ describe("LobbyComponent", () => {
       expect(spySearchingOpponentEvent).toHaveBeenCalled();
       expect(spyOpponentFoundEvent).toHaveBeenCalled();
       expect(spyTurnResultsEvent).toHaveBeenCalled();
+      expect(spyInitErrorsEvent).toHaveBeenCalled();
       expect(spyEndEvent).toHaveBeenCalled();
       expect(spyWSService).toHaveBeenCalledWith(
         component.user._id,
