@@ -9,6 +9,6 @@
     "allowJs": true,
     "emitDecoratorMetadata": true
   },
-  "files": ["src/setup-jest.ts", "src/polyfills.ts"],
+  "files": ["src/polyfills.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }
