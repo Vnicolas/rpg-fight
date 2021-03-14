@@ -52,6 +52,7 @@ export class FightsComponent implements OnInit {
       fightOpponentLabel,
       winOrLoose,
       tagClass: getFightStatusClass(winOrLoose),
+      turns: fight.turns.length,
       createdAt: eventDateFormated,
     };
   }

@@ -27,7 +27,10 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "node_modules/@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css",
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

@@ -1,22 +1,40 @@
-<div class="modal" *ngIf="character" [ngClass]="{'is-active': isActive}">
+<div class="modal" *ngIf="character" [ngClass]="{ 'is-active': isActive }">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title has-text-weight-bold has-text-centered">{{ character.name }}</p>
+      <p class="modal-card-title has-text-weight-bold has-text-centered">
+        {{ character.name }}
+      </p>
       <button class="delete" aria-label="close" (click)="close()"></button>
     </header>
     <section class="modal-card-body has-text-centered">
-      <div class="block character-picture" [innerHtml]="character.picture | safeHtml"></div>
+      <div
+        class="block character-picture"
+        [innerHtml]="character.picture | safeHtml"
+      ></div>
       <div class="content">
         <p class="tag {{ character.statusClass }}">{{ character.status }}</p>
-        <p>Rank : <span class="is-family-monospace">{{ character.rank }}</span></p>
-        <p>Skill points : <span class="is-family-monospace">{{ character.skillPoints }}</span></p>
-        <p>Health : <span class="is-family-monospace">{{ character.health }}</span></p>
-        <p>Attack : <span class="is-family-monospace">{{ character.attack }}</span></p>
-        <p>Defense : <span class="is-family-monospace">{{ character.defense }}</span></p>
-        <p>Magik : <span class="is-family-monospace">{{ character.magik }}</span></p>
         <p>
-          <span class="is-clickable">Fights</span>
+          Rank : <span class="is-family-monospace">{{ character.rank }}</span>
+        </p>
+        <p>
+          Health :
+          <span class="is-family-monospace">{{ character.health }}</span>
+        </p>
+        <p>
+          Attack :
+          <span class="is-family-monospace">{{ character.attack }}</span>
+        </p>
+        <p>
+          Defense :
+          <span class="is-family-monospace">{{ character.defense }}</span>
+        </p>
+        <p>
+          Magik : <span class="is-family-monospace">{{ character.magik }}</span>
+        </p>
+        <p>
+          Skill points :
+          <span class="is-family-monospace">{{ character.skillPoints }}</span>
         </p>
       </div>
     </section>

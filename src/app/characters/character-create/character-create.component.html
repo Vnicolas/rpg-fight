@@ -1,10 +1,17 @@
-<p *ngIf="charactersLength === 0">You don't have any characters yet, let's create one !</p>
-<hr>
+<p *ngIf="charactersLength === 0">
+  You don't have any characters yet, let's create one !
+</p>
+<hr />
 <div *ngIf="charactersLength < 10" class="field">
   <div class="block">
     <label class="label">Name</label>
     <div class="control">
-      <input [(ngModel)]="newCharacterName" class="input" type="text" placeholder="Type a name">
+      <input
+        [(ngModel)]="newCharacterName"
+        class="input"
+        type="text"
+        placeholder="Type a name"
+      />
     </div>
     <p class="help is-danger">{{ errorMessage }}</p>
   </div>

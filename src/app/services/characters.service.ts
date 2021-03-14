@@ -17,10 +17,14 @@ export class CharactersService {
     private storageService: StorageService
   ) {}
 
-  updatePoints(characterId: string, points: Point): Observable<Character> {
+  updateCharacter(
+    characterId: string,
+    payload: Partial<Character>
+  ): Observable<Character> {
+    const { _id, ...character } = payload;
     const url = `${environment.backendUrl}characters/${characterId}`;
     return this.http
-      .patch<Character>(url, points)
+      .patch<Character>(url, character)
       .pipe(first(), catchError(handleHttpErrors));
   }
 

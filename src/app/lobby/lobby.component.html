@@ -46,6 +46,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="finalResults" class="countdown has-text-centered">
+<div *ngIf="finalResults || error" class="countdown has-text-centered">
+  <p *ngIf="error" class="has-text-danger">{{ error }}</p>
   You will be redirected in {{ timeLeftBeforeNavigation }} seconds
 </div>

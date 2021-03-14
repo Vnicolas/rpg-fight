@@ -14,6 +14,7 @@ export interface Character {
   status: string;
   statusClass: string;
   ownerName: string;
+  restEndDate?: number;
 }
 
 export interface Points {

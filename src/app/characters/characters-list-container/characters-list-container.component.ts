@@ -31,15 +31,7 @@ export class CharactersListContainerComponent implements OnInit, OnDestroy {
         if (params.refresh !== "true" || !this.user) {
           return;
         }
-        try {
-          const characters = await this.userService
-            .getUserCharacters(this.user._id)
-            .toPromise();
-          this.user.characters = characters;
-          this.userService.updateUser(this.user);
-        } catch (error) {
-          console.error(error);
-        }
+        this.reloadPage();
       })
     );
   }
@@ -47,6 +39,18 @@ export class CharactersListContainerComponent implements OnInit, OnDestroy {
   public updateUser(character: Character): void {
     this.user.characters.push(character);
     this.userService.updateUser(this.user);
+  }
+
+  private async reloadPage(): Promise<void> {
+    try {
+      const characters = await this.userService
+        .getUserCharacters(this.user._id)
+        .toPromise();
+      this.user.characters = characters;
+      this.userService.updateUser(this.user);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   ngOnDestroy(): void {

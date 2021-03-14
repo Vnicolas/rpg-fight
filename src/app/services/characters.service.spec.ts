@@ -44,7 +44,7 @@ describe("CharactersService", () => {
     expect(service).toBeTruthy();
   });
 
-  describe("updatePoints()", () => {
+  describe("updateCharacter()", () => {
     it("should return http call for user", async () => {
       const spyHttpClient = spyOn(httpClient, "patch").and.returnValues(
         of({ name: "characterName" } as Character)
@@ -52,7 +52,7 @@ describe("CharactersService", () => {
       const points = {
         healt: 15,
       } as Point;
-      const user = await service.updatePoints("1", points).toPromise();
+      const user = await service.updateCharacter("1", points).toPromise();
       expect(user).toEqual({ name: "characterName" });
       expect(spyHttpClient).toHaveBeenCalledWith(
         `${environment.backendUrl}characters/1`,
@@ -68,7 +68,7 @@ describe("CharactersService", () => {
         healt: 15,
       } as Point;
       try {
-        await service.updatePoints("1", points).toPromise();
+        await service.updateCharacter("1", points).toPromise();
       } catch (error) {
         expect(error).toEqual("an error");
         expect(spyHttpClient).toHaveBeenCalledWith(

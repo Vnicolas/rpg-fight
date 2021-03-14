@@ -62,9 +62,13 @@
           </button>
         </td>
         <td>
-          <span class="tag {{ character.statusClass }}">{{
-            character.status
-          }}</span>
+          <span
+            class="tag has-tooltip-arrow {{ character.statusClass }} "
+            [attr.data-tooltip]="
+              character.restEndDate ? getResting(character.restEndDate) : null
+            "
+            >{{ character.status }}</span
+          >
         </td>
         <td>
           <div class="field has-addons">

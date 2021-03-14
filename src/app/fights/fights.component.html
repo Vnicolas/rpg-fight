@@ -13,12 +13,13 @@
     ></div>
     <div class="character-name is-size-3">{{ character.name }}</div>
   </div>
-  <div *ngIf="fights && fights.length > 0" class="table-container">
+  <div *ngIf="fights && fights.length > 0" class="table-container mb-6">
     <table class="table is-fullwidth">
       <thead>
         <tr>
           <th class="has-text-centered">Opponent</th>
           <th class="has-text-centered">Result</th>
+          <th class="has-text-centered">Turns</th>
           <th class="has-text-centered">Date</th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
           <td>
             <span class="tag {{ fight.tagClass }}">{{ fight.winOrLoose }}</span>
           </td>
+          <td class="is-family-monospace">{{ fight.turns }}</td>
           <td>{{ fight.createdAt }}</td>
         </tr>
       </tbody>

@@ -36,4 +36,8 @@ export class WSService {
   end(): Observable<any> {
     return this.socket.fromEvent("end");
   }
+
+  errors(): Observable<any> {
+    return this.socket.fromEvent("exception");
+  }
 }

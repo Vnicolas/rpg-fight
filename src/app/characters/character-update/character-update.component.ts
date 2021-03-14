@@ -77,7 +77,7 @@ export class CharacterUpdateComponent implements OnInit, OnDestroy {
       skillPoints: this.pointsAvailable,
     };
     this.charactersService
-      .updatePoints(this.character._id, payload)
+      .updateCharacter(this.character._id, payload)
       .pipe(first())
       .subscribe(
         (characterUpdated: Character) => {

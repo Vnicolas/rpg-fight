@@ -15,6 +15,7 @@ import { WSService } from "../services/ws.service";
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
+  public error = "";
   public isLoading = false;
   public currentTurn: Turn = {
     number: 0,
@@ -99,7 +100,17 @@ export class LobbyComponent implements OnInit, OnDestroy {
     );
   }
 
+  private initErrorsEvent(): void {
+    this.subscriptions.add(
+      this.wsService.errors().subscribe((error: string) => {
+        this.error = error;
+        this.goToFightPage();
+      })
+    );
+  }
+
   private initDemands(): void {
+    this.initErrorsEvent();
     this.iniDisconnectEvent();
     this.initSearchingOpponentEvent();
     this.initOpponentFoundEvent();
