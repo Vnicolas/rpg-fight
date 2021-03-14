@@ -10,6 +10,7 @@ import { CharactersListContainerComponent } from "./characters-list-container.co
 import { CharactersListComponent } from "../characters-list/characters-list.component";
 import { CharacterCreateComponent } from "../character-create/character-create.component";
 import { Character } from "app/interfaces/character.interface";
+import { ActivatedRoute, Params } from "@angular/router";
 
 describe("CharactersListContainerComponent", () => {
   let component: CharactersListContainerComponent;
@@ -31,6 +32,14 @@ describe("CharactersListContainerComponent", () => {
         MockComponent(CharacterCreateComponent),
       ],
       providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: {
+              subscribe: (fn: (value: Params) => void) => jest.fn(),
+            },
+          },
+        },
         {
           provide: UserService,
           useValue: {
