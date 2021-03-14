@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HomeComponent } from "./home/home.component";
-import { AuthGuardService as AuthGuard } from "./guards/auth.guard";
+import { AuthGuard } from "./guards/auth.guard";
 import { CharacterUpdateComponent } from "./characters/character-update/character-update.component";
 import { CharactersListContainerComponent } from "./characters/characters-list-container/characters-list-container.component";
 import { CharacterResolver } from "./resolvers/character.resolver";

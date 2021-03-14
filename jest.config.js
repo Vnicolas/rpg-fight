@@ -11,6 +11,7 @@ module.exports = {
     "<rootDir>/src/app/main.ts",
     ".mock.ts",
     ".html",
+    "environment",
   ],
   reporters: ["default"],
   globals: {

@@ -9,7 +9,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { AuthGuardService } from "app/guards/auth.guard";
+import { AuthGuard } from "app/guards/auth.guard";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { CharactersModule } from "./characters/characters.module";
 import { PipesModule } from "./shared/pipes/pipes.module";
@@ -54,7 +54,7 @@ const config: SocketIoConfig = {
   ],
   providers: [
     AuthService,
-    AuthGuardService,
+    AuthGuard,
     UserService,
     CharactersService,
     SkillsService,
