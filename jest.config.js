@@ -12,6 +12,7 @@ module.exports = {
     ".mock.ts",
     ".html",
     "environment",
+    "test",
   ],
   reporters: ["default"],
   globals: {

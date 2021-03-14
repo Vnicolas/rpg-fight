@@ -28,9 +28,16 @@ describe("LobbyComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PipesModule, RouterTestingModule.withRoutes([])],
+      imports: [PipesModule],
       declarations: [LobbyComponent, MockComponent(FighterCardComponent)],
       providers: [
+        {
+          provide: Router,
+          useValue: {
+            navigate: jest.fn(),
+            navigateByUrl: jest.fn(),
+          },
+        },
         {
           provide: WSService,
           useValue: {
@@ -212,11 +219,13 @@ describe("LobbyComponent", () => {
 
   describe("goToFightPage()", () => {
     it("should redirect to dashboard (delayed)", () => {
-      const spy = spyOn(router, "navigateByUrl");
-      const delay = Number(component.timeLeftBeforeNavigation) * 1000 + 1000;
+      const spy = spyOn(router, "navigate");
+      const delay = Number(component.timeLeftBeforeNavigation) * 1000 + 2000;
       (component as any).goToFightPage();
       jest.advanceTimersByTime(delay);
-      expect(spy).toHaveBeenCalledWith("/dashboard/characters");
+      expect(spy).toHaveBeenCalledWith(["/dashboard/characters"], {
+        queryParams: { refresh: true },
+      });
     });
   });
 
