@@ -48,6 +48,13 @@ export class UserService {
       .pipe(first(), catchError(handleHttpErrors));
   }
 
+  getUserCharacters(userId: string): Observable<Character[]> {
+    const url = `${environment.backendUrl}characters?owner=${userId}`;
+    return this.http
+      .get<Character[]>(url)
+      .pipe(first(), catchError(handleHttpErrors));
+  }
+
   private setCharacterDisplayInformations(character: Character): Character {
     character.statusClass = getStatusClass(character.status);
     return character;

@@ -112,7 +112,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
     const downloadTimer = setInterval(() => {
       if (this.timeLeftBeforeNavigation <= 0) {
         clearInterval(downloadTimer);
-        this.router.navigateByUrl("/dashboard/characters");
+        this.router.navigate(["/dashboard/characters"], {
+          queryParams: { refresh: true },
+        });
         return;
       }
       this.timeLeftBeforeNavigation--;
