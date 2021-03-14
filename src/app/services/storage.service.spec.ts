@@ -14,6 +14,10 @@ describe("StorageService", () => {
   });
 
   describe("getItem()", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
     it("should return desired item", () => {
       localStorage.setItem("test", "testValue");
       const item = service.getItem("test");
@@ -25,13 +29,13 @@ describe("StorageService", () => {
       const item = service.getItem("test", true);
       expect(item).toEqual({ name: "testValue" });
     });
-
-    afterEach(() => {
-      localStorage.clear();
-    });
   });
 
   describe("setItem()", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
     it("should return set item", () => {
       service.setItem("test", "testValue");
       const item = localStorage.getItem("test");
@@ -43,22 +47,18 @@ describe("StorageService", () => {
       const item = JSON.parse(localStorage.getItem("test") as string);
       expect(item).toEqual({ name: "testValue" });
     });
-
-    afterEach(() => {
-      localStorage.clear();
-    });
   });
 
   describe("removeItem()", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
     it("should remove item", () => {
       localStorage.setItem("test", "testValue");
       service.removeItem("test");
       const item = localStorage.getItem("test");
       expect(item).toBeUndefined();
-    });
-
-    afterEach(() => {
-      localStorage.clear();
     });
   });
 });
