@@ -52,19 +52,23 @@ export class LobbyComponent implements OnInit, OnDestroy {
     );
   }
 
-  private initDemands(): void {
+  private iniDisconnectEvent(): void {
     this.subscriptions.add(
       this.wsService.disconnected().subscribe(() => {
         this.router.navigateByUrl("/dashboard/characters");
       })
     );
+  }
 
+  private initSearchingOpponentEvent(): void {
     this.subscriptions.add(
       this.wsService.searchingOpponent().subscribe(() => {
         this.isLoading = true;
       })
     );
+  }
 
+  private initOpponentFoundEvent(): void {
     this.subscriptions.add(
       this.wsService.opponentFound().subscribe((opponent: Character) => {
         this.isLoading = false;
@@ -73,27 +77,38 @@ export class LobbyComponent implements OnInit, OnDestroy {
         this.opponentOwnerName = opponent.ownerName;
       })
     );
+  }
 
+  private initTurnResultsEvent(): void {
     this.subscriptions.add(
       this.wsService.turnResults().subscribe((results: any) => {
         this.currentTurn = results;
       })
     );
+  }
 
+  private initEndEvent(): void {
     this.subscriptions.add(
       this.wsService.end().subscribe((fight: Fight) => {
         this.finalResults = fight;
         const winnerId = this.finalResults.winnerId;
         this.fighterWinner = winnerId === this.fighter._id;
         this.opponentWinner = winnerId === this.opponentFighter._id;
-        this.gotToFightPage();
+        this.goToFightPage();
       })
     );
+  }
 
+  private initDemands(): void {
+    this.iniDisconnectEvent();
+    this.initSearchingOpponentEvent();
+    this.initOpponentFoundEvent();
+    this.initTurnResultsEvent();
+    this.initEndEvent();
     this.wsService.searchOpponent(this.user._id, this.fighter);
   }
 
-  private gotToFightPage(): void {
+  private goToFightPage(): void {
     const downloadTimer = setInterval(() => {
       if (this.timeLeftBeforeNavigation <= 0) {
         clearInterval(downloadTimer);

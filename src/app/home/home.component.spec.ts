@@ -212,21 +212,21 @@ describe("HomeComponent", () => {
   });
 
   describe("checkFields", () => {
-    it("shoud return FALSE if !this.username", () => {
+    it("should return FALSE if !this.username", () => {
       component.username = "";
       component.password = "p@ssword";
       const test = component.checkFields();
       expect(test).toEqual(false);
     });
 
-    it("shoud return FALSE if !this.password", () => {
+    it("should return FALSE if !this.password", () => {
       component.username = "user";
       component.password = "";
       const test = component.checkFields();
       expect(test).toEqual(false);
     });
 
-    it("shoud return TRUE if !this.password", () => {
+    it("should return TRUE if !this.password", () => {
       component.username = "user";
       component.password = "p@ssword";
       const test = component.checkFields();
@@ -235,15 +235,15 @@ describe("HomeComponent", () => {
   });
 
   describe("goToDashboard", () => {
-    it("shoud redirect to dashboard", () => {
+    it("should redirect to dashboard", () => {
       const spy = spyOn(router, "navigateByUrl");
       (component as any).goToDashboard();
       expect(spy).toHaveBeenCalledWith("/dashboard/characters");
     });
   });
 
-  describe("ngOnDestroy", () => {
-    it("shoud unsubscribe all subscriptions", () => {
+  describe("ngOnDestroy()", () => {
+    it("should unsubscribe all subscriptions", () => {
       const spy = spyOn((component as any).subscriptions, "unsubscribe");
       component.ngOnDestroy();
       expect(spy).toHaveBeenCalled();

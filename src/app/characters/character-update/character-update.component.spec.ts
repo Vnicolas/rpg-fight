@@ -151,7 +151,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("addPoints", () => {
-    it("shoud call addHealthPoint() if skill === 'health'", () => {
+    it("should call addHealthPoint() if skill === 'health'", () => {
       const spy = spyOn(component as any, "addHealthPoint").and.returnValue(
         jest.fn()
       );
@@ -159,21 +159,21 @@ describe("CharacterUpdateComponent", () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it("shoud call addPoint() if skill === 'attack'", () => {
+    it("should call addPoint() if skill === 'attack'", () => {
       const spy = spyOn(component as any, "addPoint").and.returnValue(
         jest.fn()
       );
       component.addPoints(CharacterFightProperty.ATTAK);
       expect(spy).toHaveBeenCalled();
     });
-    it("shoud call addPoint() if skill === 'defense'", () => {
+    it("should call addPoint() if skill === 'defense'", () => {
       const spy = spyOn(component as any, "addPoint").and.returnValue(
         jest.fn()
       );
       component.addPoints(CharacterFightProperty.DEFENSE);
       expect(spy).toHaveBeenCalled();
     });
-    it("shoud call addPoint() if skill === 'magik'", () => {
+    it("should call addPoint() if skill === 'magik'", () => {
       const spy = spyOn(component as any, "addPoint").and.returnValue(
         jest.fn()
       );
@@ -183,7 +183,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("removePoints", () => {
-    it("shoud call removeHealthPoint() if skill === 'health'", () => {
+    it("should call removeHealthPoint() if skill === 'health'", () => {
       const spy = spyOn(component as any, "removeHealthPoint").and.returnValue(
         jest.fn()
       );
@@ -191,21 +191,21 @@ describe("CharacterUpdateComponent", () => {
       expect(spy).toHaveBeenCalled();
     });
 
-    it("shoud call removePoint() if skill === 'attack'", () => {
+    it("should call removePoint() if skill === 'attack'", () => {
       const spy = spyOn(component as any, "removePoint").and.returnValue(
         jest.fn()
       );
       component.removePoints(CharacterFightProperty.ATTAK);
       expect(spy).toHaveBeenCalled();
     });
-    it("shoud call removePoint() if skill === 'defense'", () => {
+    it("should call removePoint() if skill === 'defense'", () => {
       const spy = spyOn(component as any, "removePoint").and.returnValue(
         jest.fn()
       );
       component.removePoints(CharacterFightProperty.DEFENSE);
       expect(spy).toHaveBeenCalled();
     });
-    it("shoud call removePoint() if skill === 'magik'", () => {
+    it("should call removePoint() if skill === 'magik'", () => {
       const spy = spyOn(component as any, "removePoint").and.returnValue(
         jest.fn()
       );
@@ -215,7 +215,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("update()", () => {
-    it("shoud update character and redirect to dashboard", () => {
+    it("should update character and redirect to dashboard", () => {
       const character = {
         _id: "characterId",
       } as Character;
@@ -238,7 +238,7 @@ describe("CharacterUpdateComponent", () => {
       expect(spyRedirect).toHaveBeenCalled();
     });
 
-    it("shoud set errorMessage if error occurs", () => {
+    it("should set errorMessage if error occurs", () => {
       const character = {
         _id: "characterId",
       } as Character;
@@ -256,7 +256,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("goToDashboard", () => {
-    it("shoud redirect to dashboard", () => {
+    it("should redirect to dashboard", () => {
       const spy = spyOn(router, "navigateByUrl");
       (component as any).goToDashboard();
       expect(spy).toHaveBeenCalledWith("/dashboard/characters");
@@ -264,7 +264,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("initSkill", () => {
-    it("shoud return points data", () => {
+    it("should return points data", () => {
       const expected: Points = {
         initialPoints: 5,
         finalPoints: 5,
@@ -276,7 +276,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("initSkills", () => {
-    it("shoud set all points needed", () => {
+    it("should set all points needed", () => {
       const character = {
         skillPoints: 12,
         health: 10,
@@ -296,7 +296,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("addHealthPoint", () => {
-    it("shoud set pointsAvailable and skills.health if pointsAvailable > 0", () => {
+    it("should set pointsAvailable and skills.health if pointsAvailable > 0", () => {
       component.pointsAvailable = 10;
       component.skills.health.finalPoints = 10;
       (component as any).addHealthPoint();
@@ -304,7 +304,7 @@ describe("CharacterUpdateComponent", () => {
       expect(component.skills.health.finalPoints).toEqual(11);
     });
 
-    it("shoud not set pointsAvailable and skills.health if pointsAvailable <= 0", () => {
+    it("should not set pointsAvailable and skills.health if pointsAvailable <= 0", () => {
       component.pointsAvailable = 0;
       component.skills.health.finalPoints = 10;
       (component as any).addHealthPoint();
@@ -314,7 +314,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("addPoint", () => {
-    it("shoud set skill points if possible", () => {
+    it("should set skill points if possible", () => {
       component.pointsAvailable = 10;
       component.skills.health.finalPoints = 10;
       component.skills.health.costs = [];
@@ -331,7 +331,7 @@ describe("CharacterUpdateComponent", () => {
       expect(component.skills.health.costs).toEqual([5]);
     });
 
-    it("shoud not set skill points if not possible", () => {
+    it("should not set skill points if not possible", () => {
       component.pointsAvailable = 10;
       component.skills.health.finalPoints = 10;
       component.skills.health.costs = [];
@@ -350,7 +350,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("canRemovePoint", () => {
-    it("shoud return TRUE if possible", () => {
+    it("should return TRUE if possible", () => {
       component.skills.health.initialPoints = 10;
       component.skills.health.finalPoints = 20;
       const spyCanAddPoints = spyOn(
@@ -362,7 +362,7 @@ describe("CharacterUpdateComponent", () => {
       expect(test).toEqual(true);
     });
 
-    it("shoud return FALSE if possible", () => {
+    it("should return FALSE if possible", () => {
       component.skills.health.initialPoints = 10;
       component.skills.health.finalPoints = 20;
       const spyCanAddPoints = spyOn(
@@ -376,7 +376,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("removePoint", () => {
-    it("shoud set skill points if possible", () => {
+    it("should set skill points if possible", () => {
       component.pointsAvailable = 9;
       component.skills.health.initialPoints = 10;
       component.skills.health.finalPoints = 11;
@@ -392,7 +392,7 @@ describe("CharacterUpdateComponent", () => {
       expect(component.skills.health.costs).toEqual([]);
     });
 
-    it("shoud not set skill points if not possible", () => {
+    it("should not set skill points if not possible", () => {
       component.pointsAvailable = 9;
       component.skills.health.initialPoints = 10;
       component.skills.health.finalPoints = 11;
@@ -410,7 +410,7 @@ describe("CharacterUpdateComponent", () => {
   });
 
   describe("removeHealthPoint", () => {
-    it("shoud set pointsAvailable and skills.health if possible", () => {
+    it("should set pointsAvailable and skills.health if possible", () => {
       const spyCanRemovePoint = spyOn(
         component as any,
         "canRemovePoint"
@@ -423,7 +423,7 @@ describe("CharacterUpdateComponent", () => {
       expect(component.skills.health.finalPoints).toEqual(9);
     });
 
-    it("shoud not set pointsAvailable and skills.health if not possible", () => {
+    it("should not set pointsAvailable and skills.health if not possible", () => {
       const spyCanRemovePoint = spyOn(
         component as any,
         "canRemovePoint"
@@ -437,8 +437,8 @@ describe("CharacterUpdateComponent", () => {
     });
   });
 
-  describe("ngOnDestroy", () => {
-    it("shoud unsubscribe all subscriptions", () => {
+  describe("ngOnDestroy()", () => {
+    it("should unsubscribe all subscriptions", () => {
       const spy = spyOn((component as any).subscriptions, "unsubscribe");
       component.ngOnDestroy();
       expect(spy).toHaveBeenCalled();

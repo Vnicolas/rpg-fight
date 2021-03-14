@@ -168,8 +168,8 @@ describe("CharactersListComponent", () => {
     });
   });
 
-  describe("ngOnDestroy", () => {
-    it("shoud unsubscribe all subscriptions", () => {
+  describe("ngOnDestroy()", () => {
+    it("should unsubscribe all subscriptions", () => {
       const spy = spyOn((component as any).subscriptions, "unsubscribe");
       component.ngOnDestroy();
       expect(spy).toHaveBeenCalled();
