@@ -9,7 +9,7 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ["./fighter-card.component.scss"],
 })
 export class FighterCardComponent implements OnChanges {
-  private CHANGE_CLASS_DELAY = 850; // in ms, correspond to css animation delay
+  private changeClassDelay = 850; // in ms, correspond to css animation delay
 
   @Input()
   fighter!: Character;
@@ -37,7 +37,7 @@ export class FighterCardComponent implements OnChanges {
       this.shake = true;
       setTimeout(() => {
         this.shake = false;
-      }, this.CHANGE_CLASS_DELAY);
+      }, this.changeClassDelay);
     } else {
       this.shake = false;
     }
