@@ -40,14 +40,18 @@
             </span>
           </button>
         </td>
-        <td>
+        <td class="is-relative">
           <div
             class="character-picture"
             [innerHTML]="character.picture | safeHtml"
           ></div>
         </td>
         <td class="has-text-weight-bold">{{ character.name }}</td>
-        <td class="is-family-monospace">{{ character.rank }}</td>
+        <td class="is-family-monospace">
+          <div class="badge">
+            {{ character.rank }}
+          </div>
+        </td>
         <td class="is-family-monospace">{{ character.health }}</td>
         <td class="is-family-monospace">{{ character.attack }}</td>
         <td class="is-family-monospace">{{ character.defense }}</td>
