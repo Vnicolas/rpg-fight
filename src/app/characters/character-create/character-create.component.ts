@@ -10,6 +10,9 @@ import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Subscription } from "rxjs";
 import { UserService } from "app/services/user.service";
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-bottts-sprites";
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 @Component({
   selector: "app-character-create",
@@ -19,6 +22,7 @@ import { UserService } from "app/services/user.service";
 export class CharacterCreateComponent implements OnDestroy {
   public errorMessage = "";
   public newCharacterName = "";
+  public liveCharacter: SafeHtml = "";
   private subscriptions = new Subscription();
 
   @Input()
@@ -30,8 +34,25 @@ export class CharacterCreateComponent implements OnDestroy {
   @Output()
   characterCreated = new EventEmitter<Character>();
 
-  constructor(private userService: UserService, library: FaIconLibrary) {
+  constructor(
+    private userService: UserService,
+    library: FaIconLibrary,
+    private domSanitizer: DomSanitizer
+  ) {
     library.addIcons(faPlus);
+  }
+
+  public viewCharacterLive(): void {
+    if (!this.newCharacterName) {
+      this.liveCharacter = "";
+      return;
+    }
+    const characterName = this.newCharacterName;
+    const liveCharacter = createAvatar(style, {
+      seed: characterName,
+    });
+    this.liveCharacter =
+      this.domSanitizer.bypassSecurityTrustHtml(liveCharacter);
   }
 
   public createCharacter(): void {

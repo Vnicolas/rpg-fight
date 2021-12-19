@@ -3,17 +3,27 @@
 </p>
 <hr />
 <div *ngIf="charactersLength < 10" class="field">
-  <div class="block">
-    <label class="label">Name</label>
-    <div class="control">
-      <input
-        [(ngModel)]="newCharacterName"
-        class="input"
-        type="text"
-        placeholder="Type a name"
-      />
+  <div class="columns">
+    <div class="column">
+      <div class="block">
+        <label class="label">Name</label>
+        <div class="control">
+          <input
+            [(ngModel)]="newCharacterName"
+            (keyup)="viewCharacterLive()"
+            class="input"
+            type="text"
+            placeholder="Type a name"
+          />
+        </div>
+        <p class="help is-danger">{{ errorMessage }}</p>
+      </div>
     </div>
-    <p class="help is-danger">{{ errorMessage }}</p>
+    <div class="column is-three-quarters">
+      <div class="block" *ngIf="liveCharacter">
+        <div class="live-character" [innerHtml]="liveCharacter"></div>
+      </div>
+    </div>
   </div>
   <div class="block">
     <button class="button is-rounded" (click)="createCharacter()">
