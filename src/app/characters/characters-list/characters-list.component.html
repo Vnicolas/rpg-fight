@@ -89,17 +89,6 @@
             </p>
             <p class="control">
               <button
-                class="button is-info is-small"
-                (click)="viewCharacter(character._id)"
-              >
-                <span class="icon">
-                  <fa-icon [icon]="['fas', 'id-card']"></fa-icon>
-                </span>
-                <span>View</span>
-              </button>
-            </p>
-            <p class="control">
-              <button
                 class="button is-danger is-small"
                 (click)="openModaleDeleteCharacter(character)"
               >
@@ -115,14 +104,6 @@
     </tbody>
   </table>
 </div>
-
-<app-character-infos
-  *ngIf="characterSelected"
-  [isActive]="isCharacterModalActive"
-  [character]="characterSelected"
-  (closeEvent)="isCharacterModalActive = false"
->
-</app-character-infos>
 
 <app-character-delete-modal
   *ngIf="characterToDelete"

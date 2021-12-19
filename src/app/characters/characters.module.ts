@@ -6,7 +6,6 @@ import { AppRoutingModule } from "../app-routing.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { CharacterInfosComponent } from "./character-infos/character-infos.component";
 import { CharactersListComponent } from "./characters-list/characters-list.component";
 import { CharacterUpdateComponent } from "./character-update/character-update.component";
 import { CharactersListContainerComponent } from "./characters-list-container/characters-list-container.component";
@@ -17,7 +16,6 @@ import { CharacterDeleteModalComponent } from "./character-delete-modal/characte
 
 @NgModule({
   declarations: [
-    CharacterInfosComponent,
     CharactersListComponent,
     CharacterUpdateComponent,
     CharacterDeleteModalComponent,

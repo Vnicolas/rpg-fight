@@ -24,7 +24,6 @@ import { CharactersService } from "app/services/characters.service";
 export class CharactersListComponent implements OnInit, OnDestroy {
   public errorMessage = "";
   public newCharacterName = "";
-  public characterSelected!: Character;
   public characterToDelete!: Character;
   public fighterSelected!: Character;
   public isCharacterModalActive = false;
@@ -91,19 +90,6 @@ export class CharactersListComponent implements OnInit, OnDestroy {
           }
         )
     );
-  }
-
-  public viewCharacter(characterId: string): void {
-    this.errorMessage = "";
-    const characterSelected = this.user.characters.find(
-      (character: Character) => character._id === characterId
-    );
-    if (!characterSelected) {
-      this.errorMessage = "This character does not exist !";
-      return;
-    }
-    this.characterSelected = characterSelected;
-    this.isCharacterModalActive = true;
   }
 
   public select(character: Character): void {
