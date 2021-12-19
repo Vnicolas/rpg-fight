@@ -25,8 +25,10 @@ export class CharactersListComponent implements OnInit, OnDestroy {
   public errorMessage = "";
   public newCharacterName = "";
   public characterSelected!: Character;
+  public characterToDelete!: Character;
   public fighterSelected!: Character;
   public isCharacterModalActive = false;
+  public isCharacterToDeleteModalActive = false;
   private subscriptions = new Subscription();
 
   @Input()
@@ -68,14 +70,21 @@ export class CharactersListComponent implements OnInit, OnDestroy {
       });
   }
 
-  public deleteCharacter(characterId: string): void {
+  public openModaleDeleteCharacter(character: Character): void {
+    this.characterToDelete = character;
+    this.isCharacterToDeleteModalActive = true;
+  }
+
+  public deleteCharacter(): void {
     this.errorMessage = "";
     this.subscriptions.add(
       this.userService
-        .deleteUserCharacter(characterId, this.user._id)
+        .deleteUserCharacter(this.characterToDelete._id, this.user._id)
         .subscribe(
           (user: User) => {
             this.userService.updateUser(user);
+            this.characterToDelete = undefined as unknown as Character;
+            this.isCharacterToDeleteModalActive = false;
           },
           (error: string) => {
             this.errorMessage = error;
@@ -99,7 +108,7 @@ export class CharactersListComponent implements OnInit, OnDestroy {
 
   public select(character: Character): void {
     if (this.fighterSelected?._id === character._id) {
-      this.fighterSelected = (undefined as unknown) as Character;
+      this.fighterSelected = undefined as unknown as Character;
       this.charactersService.unSelectFighter();
       return;
     }

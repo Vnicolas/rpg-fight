@@ -21,7 +21,10 @@
     </div>
     <div class="column is-three-quarters">
       <div class="block" *ngIf="liveCharacter">
-        <div class="live-character" [innerHtml]="liveCharacter"></div>
+        <div
+          class="live-character"
+          [innerHtml]="liveCharacter | safeHtml"
+        ></div>
       </div>
     </div>
   </div>

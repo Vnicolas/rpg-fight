@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
 import { UserService } from "app/services/user.service";
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-bottts-sprites";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 @Component({
   selector: "app-character-create",
@@ -22,7 +21,7 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 export class CharacterCreateComponent implements OnDestroy {
   public errorMessage = "";
   public newCharacterName = "";
-  public liveCharacter: SafeHtml = "";
+  public liveCharacter = "";
   private subscriptions = new Subscription();
 
   @Input()
@@ -34,11 +33,7 @@ export class CharacterCreateComponent implements OnDestroy {
   @Output()
   characterCreated = new EventEmitter<Character>();
 
-  constructor(
-    private userService: UserService,
-    library: FaIconLibrary,
-    private domSanitizer: DomSanitizer
-  ) {
+  constructor(private userService: UserService, library: FaIconLibrary) {
     library.addIcons(faPlus);
   }
 
@@ -48,11 +43,9 @@ export class CharacterCreateComponent implements OnDestroy {
       return;
     }
     const characterName = this.newCharacterName;
-    const liveCharacter = createAvatar(style, {
+    this.liveCharacter = createAvatar(style, {
       seed: characterName,
     });
-    this.liveCharacter =
-      this.domSanitizer.bypassSecurityTrustHtml(liveCharacter);
   }
 
   public createCharacter(): void {

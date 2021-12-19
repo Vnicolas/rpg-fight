@@ -1,0 +1,29 @@
+<div class="modal" *ngIf="character" [ngClass]="{ 'is-active': isActive }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title has-text-weight-bold has-text-centered">
+        {{ character.name }}
+      </p>
+      <button class="delete" aria-label="close" (click)="close()"></button>
+    </header>
+    <section class="modal-card-body has-text-centered">
+      <div
+        class="block character-picture"
+        [innerHtml]="character.picture | safeHtml"
+      ></div>
+      <div class="content">
+        <div class="content">
+          <div class="is-size-4">
+            Do you realy want to delete this character ?
+          </div>
+
+          <div class="buttons is-justify-content-center mt-5">
+            <button class="button is-white" (click)="close()">No</button>
+            <button class="button is-danger" (click)="confirm()">Yes</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

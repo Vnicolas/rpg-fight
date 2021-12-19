@@ -13,12 +13,14 @@ import { CharactersListContainerComponent } from "./characters-list-container/ch
 import { CharacterCreateComponent } from "./character-create/character-create.component";
 import { SkillUpdaterComponent } from "./skill-updater/skill-updater.component";
 import { PipesModule } from "../shared/pipes/pipes.module";
+import { CharacterDeleteModalComponent } from "./character-delete-modal/character-delete-modal.component";
 
 @NgModule({
   declarations: [
     CharacterInfosComponent,
     CharactersListComponent,
     CharacterUpdateComponent,
+    CharacterDeleteModalComponent,
     CharactersListContainerComponent,
     CharacterCreateComponent,
     SkillUpdaterComponent,
