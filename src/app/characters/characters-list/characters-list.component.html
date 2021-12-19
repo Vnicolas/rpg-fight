@@ -4,14 +4,103 @@
       <tr>
         <th></th>
         <th></th>
-        <th>Name</th>
-        <th>Rank</th>
-        <th>Health</th>
-        <th>Attack</th>
-        <th>Defense</th>
-        <th>Magik</th>
-        <th>Skill Points</th>
-        <th>Status</th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('name')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.name.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.name.sorted"
+                [icon]="['fas', sorts.name.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Name</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('rank')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.rank.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.rank.sorted"
+                [icon]="['fas', sorts.rank.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Rank</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('health')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.health.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.health.sorted"
+                [icon]="['fas', sorts.health.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Health</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('attack')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.attack.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.attack.sorted"
+                [icon]="['fas', sorts.attack.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Attack</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('defense')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.defense.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.defense.sorted"
+                [icon]="['fas', sorts.defense.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Defense</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('magik')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.magik.sorted">&nbsp;</ng-container>
+              <fa-icon
+                *ngIf="sorts.magik.sorted"
+                [icon]="['fas', sorts.magik.asc ? 'sort-down' : 'sort-up']"
+              >
+              </fa-icon>
+            </span>
+            Magik</span
+          >
+        </th>
+        <th>
+          <span class="sortable" (click)="sortCharacters('skillPoints')">
+            <span class="icon-container">
+              <ng-container *ngIf="!sorts.skillPoints.sorted"
+                >&nbsp;</ng-container
+              >
+              <fa-icon
+                *ngIf="sorts.skillPoints.sorted"
+                [icon]="[
+                  'fas',
+                  sorts.skillPoints.asc ? 'sort-down' : 'sort-up'
+                ]"
+              >
+              </fa-icon>
+            </span>
+            Skill Points</span
+          >
+        </th>
+        <th><span class="sortable">Status</span></th>
         <th></th>
       </tr>
     </thead>
