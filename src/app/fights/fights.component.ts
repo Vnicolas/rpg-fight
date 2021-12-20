@@ -3,7 +3,7 @@ import { ActivatedRoute, Data } from "@angular/router";
 import { Fight } from "app/interfaces/fight.interface";
 import { first } from "rxjs/operators";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faGhost } from "@fortawesome/free-solid-svg-icons";
 import { Character } from "app/interfaces/character.interface";
 import {
   dateOptions,
@@ -19,9 +19,11 @@ import {
 export class FightsComponent implements OnInit {
   public fights!: any[];
   public character!: Character;
+  public victories = 0;
+  public defeats = 0;
 
   constructor(library: FaIconLibrary, private route: ActivatedRoute) {
-    library.addIcons(faArrowLeft);
+    library.addIcons(faArrowLeft, faGhost);
   }
 
   ngOnInit(): void {
@@ -40,7 +42,10 @@ export class FightsComponent implements OnInit {
     }
 
     let winOrLoose = WON_OR_LOOSE.WON;
-    if (fight.looserId === characterId) {
+    if (fight.looserId !== characterId) {
+      this.victories++;
+    } else {
+      this.defeats++;
       winOrLoose = WON_OR_LOOSE.LOOSE;
     }
     const eventDate = new Date(fight.createdAt);

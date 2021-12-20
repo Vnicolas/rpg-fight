@@ -53,7 +53,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     );
   }
 
-  private iniDisconnectEvent(): void {
+  private initDisconnectEvent(): void {
     this.subscriptions.add(
       this.wsService.disconnected().subscribe(() => {
         this.router.navigateByUrl("/dashboard/characters");
@@ -111,7 +111,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   private initDemands(): void {
     this.initErrorsEvent();
-    this.iniDisconnectEvent();
+    this.initDisconnectEvent();
     this.initSearchingOpponentEvent();
     this.initOpponentFoundEvent();
     this.initTurnResultsEvent();

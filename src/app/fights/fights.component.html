@@ -12,6 +12,21 @@
       [innerHTML]="character.picture | safeHtml"
     ></div>
     <div class="character-name is-size-3">{{ character.name }}</div>
+    <div></div>
+    <div class="box is-size-3">
+      <div class="columns">
+        <div class="column pl-6">
+          <fa-icon [icon]="['fas', 'crown']" class="has-text-warning"></fa-icon>
+          Victories : <span class="is-family-monospace">{{ victories }}</span>
+        </div>
+        <div class="column pr-6">
+          <fa-icon [icon]="['fas', 'ghost']" class="has-text-dark"></fa-icon>
+          Defeats :
+          <span class="is-family-monospace">{{ defeats }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="box"></div>
   </div>
   <div *ngIf="fights && fights.length > 0" class="table-container mb-6">
     <table class="table is-fullwidth">
