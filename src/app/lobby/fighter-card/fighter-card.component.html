@@ -14,6 +14,12 @@
         class="fighter-picture"
         [innerHTML]="fighter.picture | safeHtml"
       ></div>
+      <img
+        class="sparkles"
+        *ngIf="magicTriggered"
+        src="assets/sparkles.gif"
+        alt=""
+      />
       <div class="is-size-2">
         HP :
         <span class="is-family-monospace has-text-info has-text-weight-bold">

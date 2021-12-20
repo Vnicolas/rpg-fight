@@ -3,7 +3,12 @@
     <div class="turn is-size-1">
       <ng-container *ngIf="!isLoading && currentTurn.number > 0">
         Turn
-        <span class="is-family-monospace"> {{ currentTurn.number }}</span>
+        <span
+          class="is-family-monospace has-text-weight-bold has-text-black"
+          [class.zoom-in-zoom-out]="turnUpdated"
+        >
+          {{ currentTurn.number }}</span
+        >
       </ng-container>
     </div>
   </div>
@@ -19,22 +24,24 @@
         [turnDiceResult]="currentTurn.dicesResults[0]"
         [isWinner]="fighterWinner"
         [fighter]="fighter"
+        [magicTriggered]="currentTurn.attackResults[0]?.magikPointsAdded"
       >
       </app-fighter-card>
     </div>
     <div class="column">
       <figure class="image vs-separator">
-        <img src="../../assets/yellow-thunder.png" />
+        <img src="assets/yellow-thunder.png" />
       </figure>
     </div>
     <div class="column is-align-self-center second-fighter">
       <app-fighter-card
-        *ngIf="opponentFighter"
+        *ngIf="opponentFighter && currentTurn"
         [ownerName]="opponentOwnerName"
         [turnAttackResult]="currentTurn.attackResults[0]"
         [turnDiceResult]="currentTurn.dicesResults[1]"
         [isWinner]="opponentWinner"
         [fighter]="opponentFighter"
+        [magicTriggered]="currentTurn.attackResults[1]?.magikPointsAdded"
       >
       </app-fighter-card>
       <ng-container *ngIf="isLoading">

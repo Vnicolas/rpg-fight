@@ -26,6 +26,9 @@ export class FighterCardComponent implements OnChanges {
   @Input()
   isWinner = true;
 
+  @Input()
+  magicTriggered? = false;
+
   public shake = false;
 
   constructor(library: FaIconLibrary) {

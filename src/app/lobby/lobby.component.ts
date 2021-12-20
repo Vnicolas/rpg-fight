@@ -17,6 +17,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   public error = "";
   public isLoading = false;
+  public turnUpdated = false;
   public currentTurn: Turn = {
     number: 0,
     attackResults: [],
@@ -84,6 +85,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.wsService.turnResults().subscribe((results: any) => {
         this.currentTurn = results;
+        this.turnUpdated = true;
+        setTimeout(() => {
+          this.turnUpdated = false;
+        }, 1000);
       })
     );
   }
@@ -95,7 +100,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         const winnerId = this.finalResults.winnerId;
         this.fighterWinner = winnerId === this.fighter._id;
         this.opponentWinner = winnerId === this.opponentFighter._id;
-        this.goToFightPage();
+        this.goToDashboardPage();
       })
     );
   }
@@ -104,7 +109,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.wsService.errors().subscribe((error: string) => {
         this.error = error;
-        this.goToFightPage();
+        this.goToDashboardPage();
       })
     );
   }
@@ -119,7 +124,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.wsService.searchOpponent(this.user._id, this.fighter);
   }
 
-  private goToFightPage(): void {
+  private goToDashboardPage(): void {
     const downloadTimer = setInterval(() => {
       if (this.timeLeftBeforeNavigation <= 0) {
         clearInterval(downloadTimer);
