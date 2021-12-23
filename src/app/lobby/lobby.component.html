@@ -1,3 +1,19 @@
+<div class="container-left">
+  <ng-particles
+    *ngIf="particlesParamsLeftReady"
+    [id]="'particles-left'"
+    [options]="particlesParamsLeft"
+  ></ng-particles>
+</div>
+
+<div class="container-right">
+  <ng-particles
+    *ngIf="particlesParamsRightReady"
+    [id]="'particles-right'"
+    [options]="particlesParamsRight"
+  ></ng-particles>
+</div>
+
 <div class="columns">
   <div class="column is-full has-text-centered">
     <div class="turn is-size-1">

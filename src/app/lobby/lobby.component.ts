@@ -7,6 +7,7 @@ import { User } from "app/interfaces/user";
 import { Subscription } from "rxjs";
 import { first } from "rxjs/operators";
 import { WSService } from "../services/ws.service";
+import * as getColors from "get-svg-colors-browser";
 
 @Component({
   selector: "app-lobby",
@@ -33,6 +34,57 @@ export class LobbyComponent implements OnInit, OnDestroy {
   public opponentWinner = false;
   public timeLeftBeforeNavigation = 4; // in seconds
 
+  particlesParamsDefault = {
+    fullScreen: {
+      enable: false,
+    },
+    fpsLimit: 60,
+    particles: {
+      move: {
+        direction: "none",
+        enable: true,
+        outMode: "bounce",
+        random: false,
+        speed: 2,
+        straight: false,
+      },
+      number: {
+        value: 50,
+      },
+      node: {
+        size: 5,
+      },
+      color: {
+        value: [],
+      },
+      links: {
+        color: "random",
+        distance: 150,
+        enable: true,
+        opacity: 0.5,
+        width: 1,
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: false,
+          },
+          onclick: {
+            enable: false,
+          },
+        },
+      },
+    },
+  };
+
+  particlesParamsRightReady = false;
+  particlesParamsRight = JSON.parse(
+    JSON.stringify(this.particlesParamsDefault)
+  );
+  particlesParamsLeftReady = false;
+  particlesParamsLeft = JSON.parse(JSON.stringify(this.particlesParamsDefault));
+
   constructor(
     private wsService: WSService,
     private route: ActivatedRoute,
@@ -44,6 +96,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
       this.user = data.fighterInfos.user;
       this.fighter = data.fighterInfos.fighter;
       this.fighter.ownerName = this.user.name;
+      this.getColorsFromFighterPicture(this.fighter).then((colors) => {
+        this.particlesParamsLeft.particles.color.value = colors;
+        this.particlesParamsLeftReady = true;
+      });
     });
 
     this.subscriptions.add(
@@ -52,6 +108,17 @@ export class LobbyComponent implements OnInit, OnDestroy {
         this.isLoading = true;
       })
     );
+  }
+
+  private async getColorsFromFighterPicture(
+    fighter: Character
+  ): Promise<string[]> {
+    return await getColors(fighter.picture).then((colors: any) => {
+      colors = colors.fills.filter((color: any) => {
+        return color.indexOf("#") >= 0;
+      });
+      return colors;
+    });
   }
 
   private initDisconnectEvent(): void {
@@ -73,10 +140,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
   private initOpponentFoundEvent(): void {
     this.subscriptions.add(
       this.wsService.opponentFound().subscribe((opponent: Character) => {
-        this.isLoading = false;
         this.currentTurn.number = 1;
         this.opponentFighter = opponent;
         this.opponentOwnerName = opponent.ownerName;
+        this.getColorsFromFighterPicture(opponent).then((colors) => {
+          this.particlesParamsRight.particles.color.value = colors;
+          this.particlesParamsRightReady = true;
+          this.isLoading = false;
+        });
       })
     );
   }
